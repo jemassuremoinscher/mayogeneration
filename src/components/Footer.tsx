@@ -55,13 +55,21 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact + B2B */}
           <div>
             <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
               {t('contact.title')}
             </p>
             <p className="text-sm opacity-80">{t('contact.address')}</p>
-            <p className="text-sm opacity-80">{t('contact.hours')}</p>
+            <p className="text-sm opacity-80 mb-4">{t('contact.hours')}</p>
+            <Link
+              to="/entreprises"
+              className="inline-block text-sm font-medium opacity-80 hover:opacity-100 hover:underline transition-opacity"
+            >
+              {language === 'fr' ? '→ Solutions Entreprises (B2B)'
+                : language === 'en' ? '→ Corporate Solutions (B2B)'
+                : '→ Корпоративные решения (B2B)'}
+            </Link>
           </div>
         </div>
 
