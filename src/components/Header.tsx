@@ -204,7 +204,7 @@ const Header = () => {
                     {cityLabel}
                   </Link>
                 );
-              ))}
+              })}
             </div>
           )}
 
