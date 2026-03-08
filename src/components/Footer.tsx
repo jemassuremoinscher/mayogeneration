@@ -7,10 +7,7 @@ const Footer = () => {
   const { t, language } = useLanguage();
   const year = new Date().getFullYear();
 
-  const locSectionTitle =
-    language === 'fr' ? 'Nos crèches sur la Côte d\'Azur'
-    : language === 'en' ? 'Our nurseries on the French Riviera'
-    : 'Наши детские сады на Лазурном Берегу';
+  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
 
   const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
 
