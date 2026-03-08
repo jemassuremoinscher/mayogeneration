@@ -87,6 +87,7 @@ const Index = () => {
         <About />
         <DailyTimeline />
         <Services />
+        <Availability />
         <ImmersiveVisit />
         <CafSimulator />
         <FaqSearch />
