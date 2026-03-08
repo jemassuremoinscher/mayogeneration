@@ -87,12 +87,14 @@ const Index = () => {
       <main className="min-h-screen">
         <Hero />
         <About />
-        <DailyTimeline />
+        <RivieraTimeline />
         <Services />
+        <IdealCareQuiz />
         <Availability />
         <ImmersiveVisit />
         <CafSimulator />
         <FaqSearch />
+        <EcoFootprint />
         <QuizContact />
       </main>
       <Footer />
