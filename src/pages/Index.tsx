@@ -3,6 +3,8 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import DailyTimeline from '@/components/DailyTimeline';
 import Services from '@/components/Services';
+import ImmersiveVisit from '@/components/ImmersiveVisit';
+import FaqSearch from '@/components/FaqSearch';
 import QuizContact from '@/components/QuizContact';
 import CafSimulator from '@/components/CafSimulator';
 import TrustBadges from '@/components/TrustBadges';
@@ -84,7 +86,9 @@ const Index = () => {
         <About />
         <DailyTimeline />
         <Services />
+        <ImmersiveVisit />
         <CafSimulator />
+        <FaqSearch />
         <QuizContact />
       </main>
       <Footer />
