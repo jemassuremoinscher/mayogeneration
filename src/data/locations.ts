@@ -120,6 +120,7 @@ export const locations: Location[] = [
   {
     slug: 'creche-antibes',
     city: 'Antibes',
+    comingSoon: true,
     lat: 43.5804,
     lng: 7.1251,
     translations: {
