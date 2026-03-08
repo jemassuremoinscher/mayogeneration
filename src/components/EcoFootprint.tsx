@@ -24,9 +24,9 @@ const counters = [
     icon: Users,
     target: 100,
     suffix: '%',
-    fr: { label: '100% Emplois Locaux', desc: 'Nos équipes vivent toutes dans le 06' },
-    en: { label: '100% Local Jobs', desc: 'All our team members live in the 06 area' },
-    ru: { label: '100% местные кадры', desc: 'Все наши сотрудники живут в регионе 06' },
+    fr: { label: '100% Emplois Locaux', desc: 'Nos équipes vivent toutes à moins de 30km des crèches' },
+    en: { label: '100% Local Jobs', desc: 'All our team members live within 30km of the nurseries' },
+    ru: { label: '100% местные кадры', desc: 'Все наши сотрудники живут менее чем в 30 км от яслей' },
   },
 ];
 
