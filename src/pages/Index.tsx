@@ -4,6 +4,7 @@ import About from '@/components/About';
 import DailyTimeline from '@/components/DailyTimeline';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
+import CafSimulator from '@/components/CafSimulator';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
 import SEOHead from '@/components/SEOHead';
@@ -81,6 +82,7 @@ const Index = () => {
         <About />
         <DailyTimeline />
         <Services />
+        <CafSimulator />
         <Contact />
       </main>
       <Footer />
