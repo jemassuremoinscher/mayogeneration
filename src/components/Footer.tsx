@@ -87,7 +87,7 @@ const Footer = () => {
 
           {/* Contact + B2B */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
               {t('contact.title')}
             </p>
             <p className="text-sm opacity-80">{t('contact.address')}</p>
