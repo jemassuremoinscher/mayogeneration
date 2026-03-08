@@ -26,7 +26,7 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground py-12 px-4" role="contentinfo">
       <div className="max-w-6xl mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
             <img src={logoMayo} alt="Mayo" className="h-8 w-auto !rounded-none brightness-0 invert mb-2" />
@@ -39,10 +39,10 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Location links */}
+          {/* Nos Crèches */}
           <div>
             <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
-              {locSectionTitle}
+              {language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли'}
             </p>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
@@ -59,6 +59,31 @@ const Footer = () => {
                       {link.label}
                     </Link>
                   )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* SEO Semantic Links */}
+          <div>
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+              {language === 'fr' ? 'Services Côte d\'Azur' : language === 'en' ? 'French Riviera Services' : 'Услуги Лазурного Берега'}
+            </p>
+            <ul className="space-y-2">
+              {[
+                { fr: 'Micro-crèche 06 Alpes-Maritimes', en: 'Micro-nursery 06 Alpes-Maritimes', ru: 'Мини-ясли 06 Приморские Альпы' },
+                { fr: 'Nanny Riviera – Garde d\'enfants', en: 'Nanny Riviera – Childcare', ru: 'Няня Ривьера – Уход за детьми' },
+                { fr: 'Crèche bilingue Côte d\'Azur', en: 'Bilingual nursery French Riviera', ru: 'Двуязычный детский сад Лазурный Берег' },
+                { fr: 'Garde d\'enfants multilingue 06', en: 'Multilingual childcare 06', ru: 'Многоязычный уход за детьми 06' },
+                { fr: 'Baby-sitting premium Nice', en: 'Premium babysitting Nice', ru: 'Премиум няня Ницца' },
+              ].map((item, i) => (
+                <li key={i}>
+                  <Link
+                    to="/"
+                    className="text-sm opacity-70 hover:opacity-100 hover:underline transition-opacity"
+                  >
+                    {item[language]}
+                  </Link>
                 </li>
               ))}
             </ul>
