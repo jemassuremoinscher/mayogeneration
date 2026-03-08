@@ -38,7 +38,7 @@ const Header = () => {
     { key: 'nav.contact', href: '/#contact' },
   ];
 
-  const locLabel = language === 'fr' ? 'Nos Localisations' : language === 'en' ? 'Our Locations' : 'Наши Локации';
+  const locLabel = language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли';
 
   const scrollTo = (href: string) => {
     setMobileOpen(false);
