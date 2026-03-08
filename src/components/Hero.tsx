@@ -20,7 +20,7 @@ const Hero = () => {
         alt={t('hero.title')}
         className="absolute inset-0 w-full h-full object-cover !rounded-none"
         loading="eager"
-        fetchPriority="high"
+        {...{ fetchpriority: "high" } as any}
         width="1920"
         height="1080"
       />
