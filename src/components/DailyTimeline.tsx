@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Sun,
   Baby,
@@ -9,6 +10,8 @@ import {
   Music,
   BookOpen,
   Heart,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 interface TimelineStep {
@@ -24,79 +27,79 @@ const steps: TimelineStep[] = [
     icon: <Sun className="w-6 h-6" />,
     titles: { fr: 'Accueil & Jeux libres', en: 'Welcome & Free Play', ru: 'Приём и свободная игра' },
     descriptions: {
-      fr: 'Les enfants sont accueillis chaleureusement par l\'équipe. Un temps de jeu libre leur permet de commencer la journée en douceur.',
-      en: 'Children are warmly welcomed by our team. Free play time lets them ease into the day gently.',
-      ru: 'Дети тепло встречаются нашей командой. Свободная игра помогает мягко начать день.',
+      fr: 'Les enfants sont accueillis chaleureusement. Un temps de jeu libre pour commencer en douceur.',
+      en: 'Children are warmly welcomed. Free play time to ease into the day.',
+      ru: 'Дети тепло встречаются командой. Свободная игра для мягкого начала дня.',
     },
   },
   {
     time: '9:00',
     icon: <Baby className="w-6 h-6" />,
-    titles: { fr: 'Motricité & Éveil corporel', en: 'Motor Skills & Movement', ru: 'Моторика и физическое развитие' },
+    titles: { fr: 'Motricité & Éveil', en: 'Motor Skills', ru: 'Моторика' },
     descriptions: {
-      fr: 'Parcours de motricité, yoga des tout-petits et activités sensorielles pour développer la coordination et la confiance.',
-      en: 'Motor courses, toddler yoga and sensory activities to develop coordination and confidence.',
-      ru: 'Двигательные упражнения, йога для малышей и сенсорные активности для развития координации.',
+      fr: 'Parcours de motricité, yoga et activités sensorielles pour la coordination.',
+      en: 'Motor courses, yoga and sensory activities for coordination.',
+      ru: 'Двигательные упражнения, йога и сенсорные активности.',
     },
   },
   {
     time: '10:00',
     icon: <Palette className="w-6 h-6" />,
-    titles: { fr: 'Atelier créatif trilingue', en: 'Trilingual Creative Workshop', ru: 'Трёхъязычная творческая мастерская' },
+    titles: { fr: 'Atelier créatif', en: 'Creative Workshop', ru: 'Творческая мастерская' },
     descriptions: {
-      fr: 'Peinture, collage et expression artistique en français, anglais et russe. L\'immersion linguistique par la créativité.',
-      en: 'Painting, collage and artistic expression in French, English and Russian. Language immersion through creativity.',
-      ru: 'Рисование, коллаж и художественное выражение на французском, английском и русском языках.',
+      fr: 'Peinture, collage et expression artistique en trois langues.',
+      en: 'Painting, collage and artistic expression in three languages.',
+      ru: 'Рисование, коллаж и художественное выражение на трёх языках.',
     },
   },
   {
     time: '11:30',
     icon: <Apple className="w-6 h-6" />,
-    titles: { fr: 'Repas bio & local', en: 'Organic & Local Lunch', ru: 'Органический обед' },
+    titles: { fr: 'Repas bio', en: 'Organic Lunch', ru: 'Органический обед' },
     descriptions: {
-      fr: 'Repas cuisinés sur place avec des produits bio et locaux. Les enfants découvrent les saveurs méditerranéennes.',
-      en: 'Meals cooked on-site with organic, local produce. Children discover Mediterranean flavours.',
-      ru: 'Блюда готовятся на месте из органических местных продуктов. Дети знакомятся со средиземноморской кухней.',
+      fr: 'Repas cuisinés sur place avec des produits bio et locaux.',
+      en: 'Meals cooked on-site with organic, local produce.',
+      ru: 'Блюда из органических местных продуктов.',
     },
   },
   {
     time: '12:30',
     icon: <Moon className="w-6 h-6" />,
-    titles: { fr: 'Sieste & Temps calme', en: 'Nap & Quiet Time', ru: 'Тихий час' },
+    titles: { fr: 'Sieste', en: 'Nap Time', ru: 'Тихий час' },
     descriptions: {
-      fr: 'Un moment de repos dans un environnement tamisé et apaisant, adapté au rythme de chaque enfant.',
-      en: 'Rest time in a dimmed, soothing environment, adapted to each child\'s rhythm.',
-      ru: 'Отдых в приглушённой успокаивающей обстановке, адаптированной к ритму каждого ребёнка.',
+      fr: 'Repos dans un environnement tamisé, adapté au rythme de chaque enfant.',
+      en: 'Rest in a dimmed environment, adapted to each child\'s rhythm.',
+      ru: 'Отдых в приглушённой обстановке, адаптированной к ритму ребёнка.',
     },
   },
   {
     time: '14:30',
     icon: <Music className="w-6 h-6" />,
-    titles: { fr: 'Éveil musical', en: 'Musical Awakening', ru: 'Музыкальное пробуждение' },
+    titles: { fr: 'Éveil musical', en: 'Musical Awakening', ru: 'Музыка' },
     descriptions: {
-      fr: 'Comptines du monde, instruments doux et rythmes : la musique éveille les sens et renforce le langage.',
-      en: 'World nursery rhymes, gentle instruments and rhythms: music awakens the senses and strengthens language.',
-      ru: 'Мировые детские песни, мягкие инструменты и ритмы: музыка пробуждает чувства и развивает речь.',
+      fr: 'Comptines du monde, instruments doux et rythmes.',
+      en: 'World nursery rhymes, gentle instruments and rhythms.',
+      ru: 'Детские песни мира, мягкие инструменты и ритмы.',
     },
   },
   {
     time: '15:30',
     icon: <BookOpen className="w-6 h-6" />,
-    titles: { fr: 'Lecture & Histoires', en: 'Stories & Reading', ru: 'Чтение и сказки' },
+    titles: { fr: 'Lecture & Histoires', en: 'Stories', ru: 'Чтение и сказки' },
     descriptions: {
-      fr: 'Histoires racontées en trois langues. Le coin lecture favorise l\'imaginaire et la découverte du monde.',
-      en: 'Stories told in three languages. The reading corner nurtures imagination and world discovery.',
-      ru: 'Истории на трёх языках. Уголок чтения развивает воображение и познание мира.',
+      fr: 'Histoires en trois langues pour l\'imaginaire et la découverte.',
+      en: 'Stories in three languages nurturing imagination.',
+      ru: 'Истории на трёх языках для воображения и познания.',
     },
   },
   {
     time: '17:00',
     icon: <Heart className="w-6 h-6" />,
-    titles: { fr: 'Retrouvailles & Départ', en: 'Reunion & Departure', ru: 'Встреча и уход домой' },
+    titles: { fr: 'Retrouvailles', en: 'Reunion', ru: 'Встреча' },
     descriptions: {
-      fr: 'Les parents retrouvent leur enfant avec un bilan personnalisé de la journée. Un moment de partage et de complicité.',
-      en: 'Parents reunite with their child and receive a personalised summary of the day. A moment of sharing.',
-      ru: 'Родители забирают ребёнка и получают персональный отчёт о дне. Момент близости и обмена.',
+      fr: 'Bilan personnalisé de la journée. Un moment de partage.',
+      en: 'Personalised daily summary. A moment of sharing.',
+      ru: 'Персональный отчёт о дне. Момент близости.',
     },
   },
 ];
@@ -115,16 +118,25 @@ const sectionSubtitles = {
 
 const DailyTimeline = () => {
   const { language } = useLanguage();
+  const reveal = useScrollReveal();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const amount = scrollRef.current.offsetWidth * 0.6;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
 
   return (
     <section
       id="journee"
-      className="py-16 sm:py-24 px-4"
+      className="py-16 sm:py-24"
       style={{ background: 'var(--gradient-soft)' }}
       aria-label={sectionTitles[language]}
     >
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12 sm:mb-16">
+      <div ref={reveal.ref} style={reveal.style}>
+        {/* Header */}
+        <div className="text-center mb-10 sm:mb-14 px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
             {sectionTitles[language]}
           </h2>
@@ -133,81 +145,61 @@ const DailyTimeline = () => {
           </p>
         </div>
 
+        {/* Nav arrows */}
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-[27px] sm:left-[31px] top-0 bottom-0 w-px bg-border" aria-hidden="true" />
+          <button
+            onClick={() => scroll('left')}
+            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/90 border border-border shadow-sm items-center justify-center hover:bg-background transition-colors"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-5 h-5 text-foreground" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/90 border border-border shadow-sm items-center justify-center hover:bg-background transition-colors"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5 text-foreground" />
+          </button>
 
-          <ol className="space-y-0">
+          {/* Scrollable track */}
+          <div
+            ref={scrollRef}
+            className="flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth px-6 sm:px-12 pb-4 snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+          >
+            <style>{`#journee div::-webkit-scrollbar { display: none; }`}</style>
+
+            {/* Horizontal line behind cards */}
             {steps.map((step, i) => (
-              <TimelineItem key={i} step={step} index={i} language={language} />
+              <article
+                key={i}
+                className="snap-start shrink-0 w-[260px] sm:w-[280px] rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-5 sm:p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-primary/30"
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20">
+                    {step.icon}
+                  </div>
+                  <span className="text-sm font-bold text-primary tracking-wide">{step.time}</span>
+                </div>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
+                  {step.titles[language]}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  {step.descriptions[language]}
+                </p>
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
 
-const TimelineItem = ({
-  step,
-  index,
-  language,
-}: {
-  step: TimelineStep;
-  index: number;
-  language: 'fr' | 'en' | 'ru';
-}) => {
-  const ref = useRef<HTMLLIElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <li
-      ref={ref}
-      className="relative flex gap-4 sm:gap-6 pb-10 last:pb-0"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(24px)',
-        transition: `opacity 0.5s ease ${index * 0.07}s, transform 0.5s ease ${index * 0.07}s`,
-      }}
-    >
-      {/* Icon node */}
-      <div className="relative z-10 shrink-0 w-14 sm:w-16 flex flex-col items-center">
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-sm border border-primary/20">
-          {step.icon}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="pt-1 pb-2 min-w-0">
-        <span className="text-xs font-semibold text-primary tracking-wide uppercase">
-          {step.time}
-        </span>
-        <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-1 mb-1.5">
-          {step.titles[language]}
-        </h3>
-        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-          {step.descriptions[language]}
+        {/* Scroll hint on mobile */}
+        <p className="sm:hidden text-center text-xs text-muted-foreground mt-2 px-4">
+          {language === 'fr' ? '← Glissez pour découvrir →' : language === 'en' ? '← Swipe to explore →' : '← Листайте →'}
         </p>
       </div>
-    </li>
+    </section>
   );
 };
 
