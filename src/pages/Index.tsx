@@ -117,6 +117,7 @@ const Index = () => {
         <IdealCareQuiz />
         <Availability />
         <ImmersiveVisit />
+        <ParentApp />
         <CafSimulator />
         <FaqSearch />
         <EcoFootprint />
@@ -124,6 +125,7 @@ const Index = () => {
       </main>
       <Footer />
       <FloatingCTA />
+      <SocialProofToast />
     </>
   );
 };
