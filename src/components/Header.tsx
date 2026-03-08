@@ -109,17 +109,27 @@ const Header = () => {
             </button>
             {locationsOpen && (
               <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[220px] animate-fade-in">
-                {locations.map((loc) => (
-                  <Link
-                    key={loc.slug}
-                    to={`/${loc.slug}`}
-                    onClick={() => setLocationsOpen(false)}
-                    className="block px-4 py-2.5 text-sm text-foreground hover:bg-accent/50 transition-colors"
-                  >
-                    {loc.translations[language].h1.split(' – ')[0].replace('Crèche et Garde d\'enfants à ', '').replace('Nursery & Childcare in ', '').replace('Детский сад и присмотр за детьми в ', '')}
-                    {loc.neighborhood && ` – ${loc.neighborhood}`}
-                  </Link>
-                ))}
+                {locations.map((loc) => {
+                  const label = loc.translations[language].h1.split(' – ')[0].replace('Crèche et Garde d\'enfants à ', '').replace('Nursery & Childcare in ', '').replace('Детский сад и присмотр за детьми в ', '') + (loc.neighborhood ? ` – ${loc.neighborhood}` : '');
+                  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+                  return loc.comingSoon ? (
+                    <span
+                      key={loc.slug}
+                      className="block px-4 py-2.5 text-sm text-muted-foreground cursor-default"
+                    >
+                      {label} <span className="text-xs font-medium text-primary/70 ml-1">({soonLabel})</span>
+                    </span>
+                  ) : (
+                    <Link
+                      key={loc.slug}
+                      to={`/${loc.slug}`}
+                      onClick={() => setLocationsOpen(false)}
+                      className="block px-4 py-2.5 text-sm text-foreground hover:bg-accent/50 transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
