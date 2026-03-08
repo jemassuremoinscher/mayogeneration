@@ -64,7 +64,7 @@ const RivieraTimeline = () => {
 
   return (
     <section id="timeline" className="py-16 sm:py-24 px-4" aria-labelledby="timeline-title">
-      <div ref={reveal.ref} style={reveal.style} className="max-w-3xl mx-auto">
+      <div ref={reveal.ref} style={reveal.style} className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
