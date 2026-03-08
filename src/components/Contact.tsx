@@ -1,9 +1,11 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const Contact = () => {
   const { t } = useLanguage();
+  const reveal = useScrollReveal();
 
   const contactInfo = [
     { icon: MapPin, label: t('contact.address'), value: 'Nice, France', href: undefined },
@@ -13,22 +15,22 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-20 px-4 bg-gradient-to-b from-secondary/30 to-primary/5" aria-labelledby="contact-title">
-      <div className="max-w-4xl mx-auto">
+    <section id="contact" className="py-16 sm:py-24 px-4" style={{ background: 'var(--gradient-soft)' }} aria-labelledby="contact-title">
+      <div ref={reveal.ref} style={reveal.style} className="max-w-4xl mx-auto">
         <h2 id="contact-title" className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-16 text-foreground">
           {t('contact.title')}
         </h2>
 
-        <Card className="border-2 border-primary/20 shadow-xl">
+        <Card className="border border-border/60 bg-card/80 backdrop-blur-sm" style={{ boxShadow: 'var(--shadow-premium)' }}>
           <CardContent className="p-6 sm:p-8 md:p-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {contactInfo.map((item, index) => {
                 const Icon = item.icon;
                 const content = (
-                  <div className="flex gap-3 sm:gap-4 items-start">
+                  <div className="flex gap-4 items-start">
                     <div className="flex-shrink-0">
-                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" aria-hidden="true" />
+                      <div className="w-12 h-12 rounded-2xl bg-primary/8 flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-primary" aria-hidden="true" />
                       </div>
                     </div>
                     <div>
