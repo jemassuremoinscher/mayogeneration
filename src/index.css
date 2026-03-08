@@ -29,11 +29,11 @@
     --radius: 1rem;
     --gradient-primary: linear-gradient(135deg, hsl(199, 72%, 56%) 0%, hsl(199, 60%, 72%) 100%);
     --gradient-soft: linear-gradient(180deg, hsl(210, 33%, 99%) 0%, hsl(199, 50%, 97%) 100%);
-    --gradient-sage: linear-gradient(135deg, hsl(143, 18%, 52%) 0%, hsl(143, 22%, 62%) 100%);
+    --gradient-sage: linear-gradient(135deg, hsl(199, 72%, 56%) 0%, hsl(199, 60%, 68%) 100%);
     --shadow-soft: 0 4px 24px -4px hsla(199, 50%, 50%, 0.08);
     --shadow-card: 0 2px 16px -4px hsla(199, 30%, 60%, 0.06);
     --shadow-premium: 0 8px 32px -8px hsla(199, 50%, 50%, 0.1);
-    --shadow-sage: 0 8px 24px -6px hsla(143, 18%, 52%, 0.25);
+    --shadow-sage: 0 8px 24px -6px hsla(199, 72%, 56%, 0.25);
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
