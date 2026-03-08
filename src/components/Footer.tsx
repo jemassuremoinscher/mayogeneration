@@ -37,7 +37,7 @@ const Footer = () => {
 
           {/* Nos Crèches */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
               {language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли'}
             </p>
             <ul className="space-y-2">
