@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import logoMayo from '@/assets/logo-mayo.png';
 import { locations } from '@/data/locations';
 
 const Header = () => {
@@ -65,10 +66,14 @@ const Header = () => {
       <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between" aria-label="Main navigation">
         <Link
           to="/"
-          className={`text-xl font-bold transition-colors ${logoColor}`}
+          className="flex items-center"
           aria-label="Mayo - Accueil"
         >
-          Mayo
+          <img
+            src={logoMayo}
+            alt="Mayo"
+            className={`h-8 sm:h-9 w-auto !rounded-none transition-all ${scrolled ? 'brightness-100' : 'brightness-0 invert'}`}
+          />
         </Link>
 
         {/* Desktop nav */}
