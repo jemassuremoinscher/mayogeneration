@@ -71,6 +71,7 @@ const translations = {
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.hours': 'Monday - Friday: 8:00 AM - 6:00 PM',
+    'footer.rights': 'All rights reserved.',
   },
   ru: {
     'nav.about': 'О нас',
