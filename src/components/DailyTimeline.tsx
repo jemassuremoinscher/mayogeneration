@@ -24,82 +24,82 @@ interface TimelineStep {
 const steps: TimelineStep[] = [
   {
     time: '8:00',
-    icon: <Sun className="w-6 h-6" />,
-    titles: { fr: 'Accueil & Jeux libres', en: 'Welcome & Free Play', ru: 'Приём и свободная игра' },
+    icon: <Sun className="w-5 h-5" />,
+    titles: { fr: 'Accueil & Jeux libres', en: 'Welcome & Free Play', ru: 'Приём и игра' },
     descriptions: {
-      fr: 'Les enfants sont accueillis chaleureusement. Un temps de jeu libre pour commencer en douceur.',
-      en: 'Children are warmly welcomed. Free play time to ease into the day.',
-      ru: 'Дети тепло встречаются командой. Свободная игра для мягкого начала дня.',
+      fr: 'Accueil chaleureux et jeu libre pour commencer en douceur.',
+      en: 'Warm welcome and free play to ease into the day.',
+      ru: 'Тёплая встреча и свободная игра.',
     },
   },
   {
     time: '9:00',
-    icon: <Baby className="w-6 h-6" />,
-    titles: { fr: 'Motricité & Éveil', en: 'Motor Skills', ru: 'Моторика' },
+    icon: <Baby className="w-5 h-5" />,
+    titles: { fr: 'Motricité', en: 'Motor Skills', ru: 'Моторика' },
     descriptions: {
-      fr: 'Parcours de motricité, yoga et activités sensorielles pour la coordination.',
-      en: 'Motor courses, yoga and sensory activities for coordination.',
-      ru: 'Двигательные упражнения, йога и сенсорные активности.',
+      fr: 'Parcours moteurs, yoga et éveil sensoriel.',
+      en: 'Motor courses, yoga and sensory awakening.',
+      ru: 'Двигательные упражнения и йога.',
     },
   },
   {
     time: '10:00',
-    icon: <Palette className="w-6 h-6" />,
-    titles: { fr: 'Atelier créatif', en: 'Creative Workshop', ru: 'Творческая мастерская' },
+    icon: <Palette className="w-5 h-5" />,
+    titles: { fr: 'Atelier créatif', en: 'Creative Workshop', ru: 'Творчество' },
     descriptions: {
-      fr: 'Peinture, collage et expression artistique en trois langues.',
-      en: 'Painting, collage and artistic expression in three languages.',
-      ru: 'Рисование, коллаж и художественное выражение на трёх языках.',
+      fr: 'Expression artistique trilingue.',
+      en: 'Trilingual artistic expression.',
+      ru: 'Художественное выражение на 3 языках.',
     },
   },
   {
     time: '11:30',
-    icon: <Apple className="w-6 h-6" />,
-    titles: { fr: 'Repas bio', en: 'Organic Lunch', ru: 'Органический обед' },
+    icon: <Apple className="w-5 h-5" />,
+    titles: { fr: 'Repas bio', en: 'Organic Lunch', ru: 'Обед' },
     descriptions: {
-      fr: 'Repas cuisinés sur place avec des produits bio et locaux.',
-      en: 'Meals cooked on-site with organic, local produce.',
-      ru: 'Блюда из органических местных продуктов.',
+      fr: 'Cuisine maison, produits bio et locaux.',
+      en: 'Home-cooked, organic local produce.',
+      ru: 'Домашняя кухня из местных продуктов.',
     },
   },
   {
     time: '12:30',
-    icon: <Moon className="w-6 h-6" />,
+    icon: <Moon className="w-5 h-5" />,
     titles: { fr: 'Sieste', en: 'Nap Time', ru: 'Тихий час' },
     descriptions: {
-      fr: 'Repos dans un environnement tamisé, adapté au rythme de chaque enfant.',
-      en: 'Rest in a dimmed environment, adapted to each child\'s rhythm.',
-      ru: 'Отдых в приглушённой обстановке, адаптированной к ритму ребёнка.',
+      fr: 'Repos adapté au rythme de chaque enfant.',
+      en: 'Rest adapted to each child\'s rhythm.',
+      ru: 'Отдых по ритму каждого ребёнка.',
     },
   },
   {
     time: '14:30',
-    icon: <Music className="w-6 h-6" />,
-    titles: { fr: 'Éveil musical', en: 'Musical Awakening', ru: 'Музыка' },
+    icon: <Music className="w-5 h-5" />,
+    titles: { fr: 'Éveil musical', en: 'Music', ru: 'Музыка' },
     descriptions: {
-      fr: 'Comptines du monde, instruments doux et rythmes.',
-      en: 'World nursery rhymes, gentle instruments and rhythms.',
-      ru: 'Детские песни мира, мягкие инструменты и ритмы.',
+      fr: 'Comptines, instruments et rythmes du monde.',
+      en: 'Nursery rhymes, instruments and world rhythms.',
+      ru: 'Детские песни и музыкальные инструменты.',
     },
   },
   {
     time: '15:30',
-    icon: <BookOpen className="w-6 h-6" />,
-    titles: { fr: 'Lecture & Histoires', en: 'Stories', ru: 'Чтение и сказки' },
+    icon: <BookOpen className="w-5 h-5" />,
+    titles: { fr: 'Histoires', en: 'Stories', ru: 'Сказки' },
     descriptions: {
-      fr: 'Histoires en trois langues pour l\'imaginaire et la découverte.',
-      en: 'Stories in three languages nurturing imagination.',
-      ru: 'Истории на трёх языках для воображения и познания.',
+      fr: 'Lectures en trois langues.',
+      en: 'Readings in three languages.',
+      ru: 'Чтение на трёх языках.',
     },
   },
   {
     time: '17:00',
-    icon: <Heart className="w-6 h-6" />,
+    icon: <Heart className="w-5 h-5" />,
     titles: { fr: 'Retrouvailles', en: 'Reunion', ru: 'Встреча' },
     descriptions: {
-      fr: 'Bilan personnalisé de la journée. Un moment de partage.',
-      en: 'Personalised daily summary. A moment of sharing.',
-      ru: 'Персональный отчёт о дне. Момент близости.',
+      fr: 'Bilan personnalisé et retrouvailles.',
+      en: 'Personalised summary and reunion.',
+      ru: 'Персональный отчёт и встреча.',
     },
   },
 ];
@@ -123,20 +123,19 @@ const DailyTimeline = () => {
 
   const scroll = (dir: 'left' | 'right') => {
     if (!scrollRef.current) return;
-    const amount = scrollRef.current.offsetWidth * 0.6;
+    const amount = scrollRef.current.offsetWidth * 0.5;
     scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
   return (
     <section
       id="journee"
-      className="py-16 sm:py-24"
+      className="py-16 sm:py-24 overflow-hidden"
       style={{ background: 'var(--gradient-soft)' }}
       aria-label={sectionTitles[language]}
     >
       <div ref={reveal.ref} style={reveal.style}>
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14 px-4">
+        <div className="text-center mb-12 sm:mb-16 px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
             {sectionTitles[language]}
           </h2>
@@ -145,57 +144,71 @@ const DailyTimeline = () => {
           </p>
         </div>
 
-        {/* Nav arrows */}
         <div className="relative">
+          {/* Arrow buttons */}
           <button
             onClick={() => scroll('left')}
-            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/90 border border-border shadow-sm items-center justify-center hover:bg-background transition-colors"
+            className="hidden sm:flex absolute left-3 top-[42px] z-10 w-9 h-9 rounded-full bg-background border border-border shadow-sm items-center justify-center hover:bg-primary/10 transition-colors"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5 text-foreground" />
+            <ChevronLeft className="w-4 h-4 text-foreground" />
           </button>
           <button
             onClick={() => scroll('right')}
-            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/90 border border-border shadow-sm items-center justify-center hover:bg-background transition-colors"
+            className="hidden sm:flex absolute right-3 top-[42px] z-10 w-9 h-9 rounded-full bg-background border border-border shadow-sm items-center justify-center hover:bg-primary/10 transition-colors"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5 text-foreground" />
+            <ChevronRight className="w-4 h-4 text-foreground" />
           </button>
 
-          {/* Scrollable track */}
+          {/* Scrollable frieze */}
           <div
             ref={scrollRef}
-            className="flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth px-6 sm:px-12 pb-4 snap-x snap-mandatory"
+            className="overflow-x-auto scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             <style>{`#journee div::-webkit-scrollbar { display: none; }`}</style>
 
-            {/* Horizontal line behind cards */}
-            {steps.map((step, i) => (
-              <article
-                key={i}
-                className="snap-start shrink-0 w-[260px] sm:w-[280px] rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-5 sm:p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-primary/30"
-                style={{ boxShadow: 'var(--shadow-card)' }}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20">
-                    {step.icon}
+            <div className="inline-flex items-start px-8 sm:px-16 min-w-max">
+              {steps.map((step, i) => (
+                <div key={i} className="flex flex-col items-center relative" style={{ width: 160 }}>
+                  {/* Time label */}
+                  <span className="text-xs font-bold text-primary mb-2 tracking-wide">
+                    {step.time}
+                  </span>
+
+                  {/* Node + line */}
+                  <div className="relative flex items-center w-full justify-center" style={{ height: 28 }}>
+                    {/* Line left */}
+                    {i > 0 && (
+                      <div className="absolute left-0 right-1/2 top-1/2 h-[2px] bg-primary/20" />
+                    )}
+                    {/* Line right */}
+                    {i < steps.length - 1 && (
+                      <div className="absolute left-1/2 right-0 top-1/2 h-[2px] bg-primary/20" />
+                    )}
+                    {/* Dot */}
+                    <div className="relative z-10 w-10 h-10 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-primary">
+                      {step.icon}
+                    </div>
                   </div>
-                  <span className="text-sm font-bold text-primary tracking-wide">{step.time}</span>
+
+                  {/* Content card below */}
+                  <div className="mt-4 text-center px-2 max-w-[152px]">
+                    <h3 className="text-sm font-semibold text-foreground mb-1 leading-tight">
+                      {step.titles[language]}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {step.descriptions[language]}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 leading-snug">
-                  {step.titles[language]}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                  {step.descriptions[language]}
-                </p>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Scroll hint on mobile */}
-        <p className="sm:hidden text-center text-xs text-muted-foreground mt-2 px-4">
+        <p className="sm:hidden text-center text-xs text-muted-foreground mt-4 px-4">
           {language === 'fr' ? '← Glissez pour découvrir →' : language === 'en' ? '← Swipe to explore →' : '← Листайте →'}
         </p>
       </div>
