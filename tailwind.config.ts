@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'poppins': ['Poppins', 'sans-serif'],
+        'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        'body': ['Poppins', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
