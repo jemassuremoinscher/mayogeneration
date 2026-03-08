@@ -2,6 +2,7 @@ export interface Location {
   slug: string;
   city: string;
   neighborhood?: string;
+  comingSoon?: boolean;
   lat: number;
   lng: number;
   translations: {
@@ -71,6 +72,7 @@ export const locations: Location[] = [
   {
     slug: 'creche-cannes',
     city: 'Cannes',
+    comingSoon: true,
     lat: 43.5528,
     lng: 7.0174,
     translations: {
@@ -118,6 +120,7 @@ export const locations: Location[] = [
   {
     slug: 'creche-antibes',
     city: 'Antibes',
+    comingSoon: true,
     lat: 43.5804,
     lng: 7.1251,
     translations: {
@@ -165,6 +168,7 @@ export const locations: Location[] = [
   {
     slug: 'creche-monaco',
     city: 'Monaco',
+    comingSoon: true,
     lat: 43.7384,
     lng: 7.4246,
     translations: {

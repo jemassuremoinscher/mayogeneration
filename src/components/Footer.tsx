@@ -12,13 +12,15 @@ const Footer = () => {
     : language === 'en' ? 'Our nurseries on the French Riviera'
     : 'Наши детские сады на Лазурном Берегу';
 
-  const footerLinks: { label: string; slug: string }[] = locations.map((loc) => {
+  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+
+  const footerLinks = locations.map((loc) => {
     const labels: Record<string, string> = {
       fr: `Nursery privée & Micro-crèche ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
       en: `Private nursery ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
       ru: `Частный детский сад ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
     };
-    return { label: labels[language], slug: loc.slug };
+    return { label: labels[language], slug: loc.slug, comingSoon: loc.comingSoon };
   });
 
   return (
@@ -45,12 +47,18 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.slug}>
-                  <Link
-                    to={`/${link.slug}`}
-                    className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.comingSoon ? (
+                    <span className="text-sm opacity-50">
+                      {link.label} <span className="text-xs">({soonLabel})</span>
+                    </span>
+                  ) : (
+                    <Link
+                      to={`/${link.slug}`}
+                      className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
