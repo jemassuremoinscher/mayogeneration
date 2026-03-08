@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Calculator, Euro, Mail, ArrowRight, Info } from 'lucide-react';
-import useScrollReveal from '@/hooks/useScrollReveal';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const ELIGIBLE_DEPARTMENTS = ['06', '13', '83', '84', '04', '05', '98'];
 
