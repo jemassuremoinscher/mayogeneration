@@ -37,7 +37,7 @@ const Footer = () => {
 
           {/* Nos Crèches */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
               {language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли'}
             </p>
             <ul className="space-y-2">
@@ -62,7 +62,7 @@ const Footer = () => {
 
           {/* SEO Semantic Links */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
               {language === 'fr' ? 'Services Côte d\'Azur' : language === 'en' ? 'French Riviera Services' : 'Услуги Лазурного Берега'}
             </p>
             <ul className="space-y-2">
@@ -87,7 +87,7 @@ const Footer = () => {
 
           {/* Contact + B2B */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide opacity-70">
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
               {t('contact.title')}
             </p>
             <p className="text-sm opacity-80">{t('contact.address')}</p>
