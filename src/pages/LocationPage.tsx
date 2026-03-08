@@ -64,6 +64,7 @@ const LocationPage = () => {
 
   return (
     <>
+      <ScrollProgressBar />
       <SEOHead
         title={tr.metaTitle}
         description={tr.metaDescription}
