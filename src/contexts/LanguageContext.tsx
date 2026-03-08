@@ -103,6 +103,7 @@ const translations = {
     'contact.phone': 'Телефон',
     'contact.email': 'Эл. почта',
     'contact.hours': 'Понедельник - Пятница: 8:00 - 18:00',
+    'footer.rights': 'Все права защищены.',
   },
 };
 
