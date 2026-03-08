@@ -29,6 +29,8 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const b2bLabel = language === 'fr' ? 'Entreprises' : language === 'en' ? 'Corporate' : 'Бизнесу';
+
   const navItems = [
     { key: 'nav.about', href: '/#about' },
     { key: 'nav.services', href: '/#services' },
@@ -81,6 +83,13 @@ const Header = () => {
               {t(item.key)}
             </a>
           ))}
+
+          <Link
+            to="/entreprises"
+            className={`text-sm font-medium transition-colors hover:text-primary ${textColor}`}
+          >
+            {b2bLabel}
+          </Link>
 
           {/* Locations dropdown */}
           <div className="relative" ref={dropdownRef}>
@@ -141,6 +150,14 @@ const Header = () => {
               {t(item.key)}
             </a>
           ))}
+
+          <Link
+            to="/entreprises"
+            onClick={() => setMobileOpen(false)}
+            className="block text-foreground font-medium py-2"
+          >
+            {b2bLabel}
+          </Link>
 
           {/* Mobile locations accordion */}
           <button
