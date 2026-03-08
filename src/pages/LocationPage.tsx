@@ -4,6 +4,7 @@ import { locations } from '@/data/locations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEOHead from '@/components/SEOHead';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
 
 const baseUrl = 'https://mayo-nice.fr';
@@ -63,6 +64,7 @@ const LocationPage = () => {
 
   return (
     <>
+      <ScrollProgressBar />
       <SEOHead
         title={tr.metaTitle}
         description={tr.metaDescription}
@@ -97,8 +99,17 @@ const LocationPage = () => {
             <ArrowLeft className="w-4 h-4" />
             {language === 'fr' ? 'Retour à l\'accueil' : language === 'en' ? 'Back to home' : 'На главную'}
           </Link>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight flex flex-wrap items-center gap-3">
             {tr.h1}
+            {!location.comingSoon && (
+              <span className="inline-flex items-center gap-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1 whitespace-nowrap">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                {language === 'fr' ? 'Dernières places disponibles pour Septembre 2026' : language === 'en' ? 'Last spots available for September 2026' : 'Последние места на сентябрь 2026'}
+              </span>
+            )}
           </h1>
         </section>
 
@@ -126,17 +137,18 @@ const LocationPage = () => {
               style={{ border: 0, borderRadius: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.007},${location.lng + 0.01},${location.lat + 0.007}&layer=mapnik&marker=${location.lat},${location.lng}`}
+              src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3000!2d${location.lng}!3d${location.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr`}
+              allowFullScreen
             />
           </div>
           <p className="text-sm text-muted-foreground mt-2">
             <a
-              href={`https://www.openstreetmap.org/?mlat=${location.lat}&mlon=${location.lng}#map=16/${location.lat}/${location.lng}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              {language === 'fr' ? 'Voir sur la carte' : language === 'en' ? 'View on map' : 'Открыть карту'}
+              {language === 'fr' ? 'Voir sur Google Maps' : language === 'en' ? 'View on Google Maps' : 'Открыть в Google Картах'}
             </a>
           </p>
         </section>
