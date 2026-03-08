@@ -2,6 +2,7 @@ export interface Location {
   slug: string;
   city: string;
   neighborhood?: string;
+  comingSoon?: boolean;
   lat: number;
   lng: number;
   translations: {
