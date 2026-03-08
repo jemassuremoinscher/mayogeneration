@@ -4,6 +4,7 @@ import { locations } from '@/data/locations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEOHead from '@/components/SEOHead';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
 
 const baseUrl = 'https://mayo-nice.fr';
