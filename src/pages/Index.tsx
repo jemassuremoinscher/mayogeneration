@@ -5,6 +5,7 @@ import DailyTimeline from '@/components/DailyTimeline';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import FloatingCTA from '@/components/FloatingCTA';
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      <FloatingCTA />
     </>
   );
 };
