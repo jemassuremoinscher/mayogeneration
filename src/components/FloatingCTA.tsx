@@ -38,9 +38,9 @@ const FloatingCTA = () => {
           href="tel:+33XXXXXXXXX"
           className="flex items-center justify-center gap-2.5 py-4 px-6 font-semibold text-base font-body transition-all active:scale-[0.98]"
           style={{
-            background: 'var(--gradient-sage)',
+            background: 'var(--gradient-primary)',
             color: 'white',
-            boxShadow: '0 -4px 20px -4px hsl(143 18% 52% / 0.3)',
+            boxShadow: '0 -4px 20px -4px hsl(199 72% 56% / 0.3)',
           }}
           aria-label={ctaLabels[language]}
         >
