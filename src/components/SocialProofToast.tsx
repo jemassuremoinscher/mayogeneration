@@ -1,12 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { X, Star, MapPin, CalendarCheck } from 'lucide-react';
+import { X, Star, MapPin } from 'lucide-react';
 
 const messages = [
-  { icon: CalendarCheck, text: 'Marc de Cannes vient de réserver une visite' },
-  { icon: MapPin, text: '3 nouvelles places disponibles à Nice Cimiez' },
+  { icon: MapPin, text: '3 nouvelles places disponibles à Nice – Médecin' },
   { icon: Star, text: 'Note de 4.9/5 basée sur 120 avis vérifiés' },
-  { icon: CalendarCheck, text: 'Sophie d\'Antibes a inscrit son enfant ce matin' },
-  { icon: MapPin, text: '2 places restantes à Monaco pour septembre' },
   { icon: Star, text: '98% des parents recommandent Mayo' },
 ];
 
