@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'display': ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        'body': ['Poppins', 'system-ui', 'sans-serif'],
+        'display': ['Nunito', 'system-ui', 'sans-serif'],
+        'body': ['Nunito', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

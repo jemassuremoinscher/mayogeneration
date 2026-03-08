@@ -26,7 +26,7 @@ const FloatingCTA = () => {
             const Icon = badge.icon;
             return (
               <div key={i} className="flex items-center gap-1.5">
-                <Icon className="w-3.5 h-3.5 text-sage" />
+                <Icon className="w-3.5 h-3.5 text-primary" />
                 <span className="text-[10px] font-medium text-muted-foreground font-body">{badge[language]}</span>
               </div>
             );
@@ -38,9 +38,9 @@ const FloatingCTA = () => {
           href="tel:+33XXXXXXXXX"
           className="flex items-center justify-center gap-2.5 py-4 px-6 font-semibold text-base font-body transition-all active:scale-[0.98]"
           style={{
-            background: 'var(--gradient-sage)',
+            background: 'var(--gradient-primary)',
             color: 'white',
-            boxShadow: '0 -4px 20px -4px hsl(143 18% 52% / 0.3)',
+            boxShadow: '0 -4px 20px -4px hsl(199 72% 56% / 0.3)',
           }}
           aria-label={ctaLabels[language]}
         >

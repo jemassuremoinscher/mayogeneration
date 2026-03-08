@@ -38,7 +38,7 @@ const Hero = () => {
         <button
           onClick={scrollToContact}
           className="hidden md:inline-flex text-base sm:text-lg px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-body"
-          style={{ background: 'var(--gradient-sage)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
+          style={{ background: 'var(--gradient-primary)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
           aria-label={t('hero.cta')}
         >
           {t('hero.cta')}
