@@ -99,8 +99,17 @@ const LocationPage = () => {
             <ArrowLeft className="w-4 h-4" />
             {language === 'fr' ? 'Retour à l\'accueil' : language === 'en' ? 'Back to home' : 'На главную'}
           </Link>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight flex flex-wrap items-center gap-3">
             {tr.h1}
+            {!location.comingSoon && (
+              <span className="inline-flex items-center gap-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1 whitespace-nowrap">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                {language === 'fr' ? 'Dernières places disponibles pour Septembre 2026' : language === 'en' ? 'Last spots available for September 2026' : 'Последние места на сентябрь 2026'}
+              </span>
+            )}
           </h1>
         </section>
 
