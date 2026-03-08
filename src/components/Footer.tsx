@@ -27,7 +27,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <p className="text-xl font-bold mb-2">Mayo</p>
+            <img src={logoMayo} alt="Mayo" className="h-8 w-auto !rounded-none brightness-0 invert mb-2" />
             <p className="text-sm opacity-80">
               {language === 'fr'
                 ? 'Crèche multilingue & nursery privée sur la Côte d\'Azur'
