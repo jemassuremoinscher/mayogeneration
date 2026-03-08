@@ -86,7 +86,9 @@ const Index = () => {
         <About />
         <DailyTimeline />
         <Services />
+        <ImmersiveVisit />
         <CafSimulator />
+        <FaqSearch />
         <QuizContact />
       </main>
       <Footer />
