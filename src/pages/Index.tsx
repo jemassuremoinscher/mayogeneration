@@ -4,11 +4,10 @@ import About from '@/components/About';
 import Services from '@/components/Services';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const Index = () => {
   return (
-    <LanguageProvider>
+    <>
       <Header />
       <main className="min-h-screen">
         <Hero />
@@ -17,7 +16,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
-    </LanguageProvider>
+    </>
   );
 };
 
