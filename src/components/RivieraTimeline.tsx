@@ -76,30 +76,28 @@ const RivieraTimeline = () => {
           </h2>
         </div>
 
-        {/* Vertical Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-border" aria-hidden="true" />
+        {/* Horizontal Timeline */}
+        <div className="relative overflow-x-auto pb-4 -mx-4 px-4">
+          {/* Horizontal line */}
+          <div className="absolute top-8 left-0 right-0 h-px bg-border" aria-hidden="true" />
 
-          <div className="space-y-8">
+          <div className="flex gap-6 min-w-max">
             {steps.map((step, i) => {
               const Icon = step.icon;
               const content = step[language];
               return (
-                <div key={i} className="relative flex gap-5 sm:gap-6">
+                <div key={i} className="relative flex flex-col items-center w-56 shrink-0">
                   {/* Node */}
-                  <div className="relative z-10 shrink-0">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-card border-2 border-border flex items-center justify-center" style={{ boxShadow: 'var(--shadow-card)' }}>
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                  <div className="relative z-10 mb-4">
+                    <div className="w-16 h-16 rounded-2xl bg-card border-2 border-border flex items-center justify-center" style={{ boxShadow: 'var(--shadow-card)' }}>
+                      <Icon className="w-6 h-6 text-primary" />
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 pt-1 sm:pt-2 pb-2">
-                    <span className="text-xs font-bold text-sage uppercase tracking-wider">{step.time}</span>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground mt-1">{content.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{content.desc}</p>
-                  </div>
+                  <span className="text-xs font-bold text-sage uppercase tracking-wider">{step.time}</span>
+                  <h3 className="text-base font-bold text-foreground mt-1 text-center">{content.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed text-center">{content.desc}</p>
                 </div>
               );
             })}
