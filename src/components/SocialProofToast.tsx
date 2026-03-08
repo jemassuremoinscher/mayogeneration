@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { X, Star, MapPin, CalendarCheck } from 'lucide-react';
+import { X, Star, MapPin } from 'lucide-react';
 
 const messages = [
   { icon: MapPin, text: '3 nouvelles places disponibles à Nice – Médecin' },

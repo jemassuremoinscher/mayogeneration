@@ -15,9 +15,9 @@ interface Establishment {
 
 const establishments: Establishment[] = [
   { city: 'Nice – Médecin', slug: 'creche-nice-medecin', occupancy: 85, totalSpots: 12, filledSpots: 10 },
-  { city: 'Cannes', slug: 'creche-cannes', occupancy: 60, totalSpots: 12, filledSpots: 7, comingSoon: true },
-  { city: 'Antibes', slug: 'creche-antibes', occupancy: 40, totalSpots: 12, filledSpots: 5, comingSoon: true },
-  { city: 'Monaco', slug: 'creche-monaco', occupancy: 92, totalSpots: 10, filledSpots: 9, lastSpot: true, comingSoon: true },
+  { city: 'Cannes', slug: 'creche-cannes', occupancy: 0, totalSpots: 12, filledSpots: 0, comingSoon: true },
+  { city: 'Antibes', slug: 'creche-antibes', occupancy: 0, totalSpots: 12, filledSpots: 0, comingSoon: true },
+  { city: 'Monaco', slug: 'creche-monaco', occupancy: 0, totalSpots: 10, filledSpots: 0, comingSoon: true },
 ];
 
 const tr = {
