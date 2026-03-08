@@ -1,5 +1,4 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-nursery.jpg';
 
 const Hero = () => {
