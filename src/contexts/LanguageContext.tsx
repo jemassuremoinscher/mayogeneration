@@ -39,6 +39,7 @@ const translations = {
     'contact.phone': 'Téléphone',
     'contact.email': 'Email',
     'contact.hours': 'Lundi - Vendredi: 8h00 - 18h00',
+    'footer.rights': 'Tous droits réservés.',
   },
   en: {
     'nav.about': 'About',
@@ -70,6 +71,7 @@ const translations = {
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.hours': 'Monday - Friday: 8:00 AM - 6:00 PM',
+    'footer.rights': 'All rights reserved.',
   },
   ru: {
     'nav.about': 'О нас',
@@ -101,6 +103,7 @@ const translations = {
     'contact.phone': 'Телефон',
     'contact.email': 'Эл. почта',
     'contact.hours': 'Понедельник - Пятница: 8:00 - 18:00',
+    'footer.rights': 'Все права защищены.',
   },
 };
 
