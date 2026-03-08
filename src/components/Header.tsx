@@ -29,6 +29,8 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const b2bLabel = language === 'fr' ? 'Entreprises' : language === 'en' ? 'Corporate' : 'Бизнесу';
+
   const navItems = [
     { key: 'nav.about', href: '/#about' },
     { key: 'nav.services', href: '/#services' },
