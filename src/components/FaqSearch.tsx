@@ -59,7 +59,7 @@ const defaultAnswer = {
 
 const trLabels = {
   fr: {
-    title: 'Posez votre question sur la garde d\'enfants dans le 06',
+    title: 'Posez votre question sur la garde d\'enfants sur la Côte d\'Azur',
     placeholder: 'Ex: Quelles aides pour Monaco ?',
     suggestionsTitle: 'Questions fréquentes',
     guideOffer: 'Voulez-vous recevoir notre guide complet des aides 2026 par email ?',
@@ -75,7 +75,7 @@ const trLabels = {
     ],
   },
   en: {
-    title: 'Ask your question about childcare in the 06',
+    title: 'Ask your question about childcare on the French Riviera',
     placeholder: 'E.g.: What aid is available for Monaco?',
     suggestionsTitle: 'Frequently asked',
     guideOffer: 'Would you like to receive our complete 2026 aid guide by email?',
@@ -91,7 +91,7 @@ const trLabels = {
     ],
   },
   ru: {
-    title: 'Задайте вопрос об уходе за детьми в 06',
+    title: 'Задайте вопрос об уходе за детьми на Лазурном Берегу',
     placeholder: 'Напр.: Какие пособия для Монако?',
     suggestionsTitle: 'Частые вопросы',
     guideOffer: 'Хотите получить полный справочник пособий 2026 по email?',
