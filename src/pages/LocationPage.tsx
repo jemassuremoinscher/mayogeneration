@@ -137,17 +137,18 @@ const LocationPage = () => {
               style={{ border: 0, borderRadius: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.007},${location.lng + 0.01},${location.lat + 0.007}&layer=mapnik&marker=${location.lat},${location.lng}`}
+              src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3000!2d${location.lng}!3d${location.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr`}
+              allowFullScreen
             />
           </div>
           <p className="text-sm text-muted-foreground mt-2">
             <a
-              href={`https://www.openstreetmap.org/?mlat=${location.lat}&mlon=${location.lng}#map=16/${location.lat}/${location.lng}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              {language === 'fr' ? 'Voir sur la carte' : language === 'en' ? 'View on map' : 'Открыть карту'}
+              {language === 'fr' ? 'Voir sur Google Maps' : language === 'en' ? 'View on Google Maps' : 'Открыть в Google Картах'}
             </a>
           </p>
         </section>
