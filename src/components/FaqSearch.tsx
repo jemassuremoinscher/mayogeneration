@@ -59,7 +59,7 @@ const defaultAnswer = {
 
 const trLabels = {
   fr: {
-    title: 'Posez votre question sur la garde d\'enfants dans le 06',
+    title: 'Posez votre question sur la garde d\'enfants sur la Côte d\'Azur',
     placeholder: 'Ex: Quelles aides pour Monaco ?',
     suggestionsTitle: 'Questions fréquentes',
     guideOffer: 'Voulez-vous recevoir notre guide complet des aides 2026 par email ?',
