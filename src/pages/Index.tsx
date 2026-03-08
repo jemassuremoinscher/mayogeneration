@@ -70,6 +70,29 @@ const jsonLd = {
     { '@type': 'City', name: 'Monaco' },
   ],
   priceRange: '€€',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '120',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Sophie L.' },
+      datePublished: '2025-11-15',
+      reviewBody: 'Un accueil exceptionnel, notre fille adore y aller chaque matin. L\'équipe est bienveillante et professionnelle.',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+    },
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Marc D.' },
+      datePublished: '2025-10-20',
+      reviewBody: 'Cadre magnifique sur la Riviera, repas bio et activités variées. Je recommande à 100%.',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+    },
+  ],
 };
 
 const Index = () => {
