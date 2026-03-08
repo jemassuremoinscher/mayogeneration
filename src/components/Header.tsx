@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import logoMayo from '@/assets/logo-mayo.png';
 import { locations } from '@/data/locations';
 
 const Header = () => {
