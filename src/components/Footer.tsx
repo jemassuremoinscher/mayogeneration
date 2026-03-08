@@ -9,7 +9,6 @@ const Footer = () => {
 
   const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
 
-  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
 
   const footerLinks = locations.map((loc) => {
     const labels: Record<string, string> = {
