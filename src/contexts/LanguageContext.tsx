@@ -39,6 +39,7 @@ const translations = {
     'contact.phone': 'Téléphone',
     'contact.email': 'Email',
     'contact.hours': 'Lundi - Vendredi: 8h00 - 18h00',
+    'footer.rights': 'Tous droits réservés.',
   },
   en: {
     'nav.about': 'About',
