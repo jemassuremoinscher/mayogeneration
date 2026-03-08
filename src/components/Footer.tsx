@@ -47,12 +47,18 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.slug}>
-                  <Link
-                    to={`/${link.slug}`}
-                    className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.comingSoon ? (
+                    <span className="text-sm opacity-50">
+                      {link.label} <span className="text-xs">({soonLabel})</span>
+                    </span>
+                  ) : (
+                    <Link
+                      to={`/${link.slug}`}
+                      className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

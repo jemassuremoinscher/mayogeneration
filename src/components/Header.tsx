@@ -184,15 +184,27 @@ const Header = () => {
           </button>
           {mobileLocationsOpen && (
             <div className="pl-4 space-y-1">
-              {locations.map((loc) => (
-                <Link
-                  key={loc.slug}
-                  to={`/${loc.slug}`}
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-muted-foreground py-1.5 text-sm hover:text-primary transition-colors"
-                >
-                  {loc.city}{loc.neighborhood ? ` – ${loc.neighborhood}` : ''}
-                </Link>
+              {locations.map((loc) => {
+                const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+                const cityLabel = loc.city + (loc.neighborhood ? ` – ${loc.neighborhood}` : '');
+                return loc.comingSoon ? (
+                  <span
+                    key={loc.slug}
+                    className="block text-muted-foreground/50 py-1.5 text-sm"
+                  >
+                    {cityLabel} <span className="text-xs text-primary/60">({soonLabel})</span>
+                  </span>
+                ) : (
+                  <Link
+                    key={loc.slug}
+                    to={`/${loc.slug}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="block text-muted-foreground py-1.5 text-sm hover:text-primary transition-colors"
+                  >
+                    {cityLabel}
+                  </Link>
+                );
+              })}
               ))}
             </div>
           )}
