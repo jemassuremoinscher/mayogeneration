@@ -78,13 +78,14 @@ const Index = () => {
         jsonLd={jsonLd}
       />
       <Header />
+      <TrustBadges />
       <main className="min-h-screen">
         <Hero />
         <About />
         <DailyTimeline />
         <Services />
         <CafSimulator />
-        <Contact />
+        <QuizContact />
       </main>
       <Footer />
       <FloatingCTA />
