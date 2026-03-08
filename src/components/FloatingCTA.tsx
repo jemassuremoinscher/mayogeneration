@@ -26,7 +26,7 @@ const FloatingCTA = () => {
             const Icon = badge.icon;
             return (
               <div key={i} className="flex items-center gap-1.5">
-                <Icon className="w-3.5 h-3.5 text-sage" />
+                <Icon className="w-3.5 h-3.5 text-primary" />
                 <span className="text-[10px] font-medium text-muted-foreground font-body">{badge[language]}</span>
               </div>
             );
