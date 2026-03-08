@@ -3,7 +3,10 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { locations } from '@/data/locations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
+
+const baseUrl = 'https://mayo-nice.fr';
 
 const LocationPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,6 +17,7 @@ const LocationPage = () => {
   if (!location) {
     return (
       <>
+        <SEOHead title="Page non trouvée | Mayo" description="Cette page n'existe pas." />
         <Header />
         <main className="min-h-screen flex items-center justify-center px-4">
           <div className="text-center">
@@ -28,24 +32,63 @@ const LocationPage = () => {
 
   const tr = location.translations[language];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': ['LocalBusiness', 'ChildCare'],
+    name: `Mayo ${location.city}`,
+    description: tr.metaDescription,
+    url: `${baseUrl}/${location.slug}`,
+    telephone: '+33XXXXXXXXX',
+    email: 'contact@mayo-nice.fr',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: location.city,
+      addressRegion: 'Provence-Alpes-Côte d\'Azur',
+      addressCountry: location.city === 'Monaco' ? 'MC' : 'FR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: location.lat,
+      longitude: location.lng,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    knowsLanguage: ['fr', 'en', 'ru'],
+    priceRange: '€€',
+  };
+
   return (
     <>
+      <SEOHead
+        title={tr.metaTitle}
+        description={tr.metaDescription}
+        canonical={`${baseUrl}/${location.slug}`}
+        jsonLd={jsonLd}
+      />
       <Header />
       <main className="min-h-screen pt-20">
-        {/* Breadcrumb */}
+        {/* Breadcrumb with schema */}
         <nav className="max-w-5xl mx-auto px-4 py-4" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link to="/" className="hover:text-primary transition-colors">Mayo</Link>
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground" itemScope itemType="https://schema.org/BreadcrumbList">
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <Link to="/" itemProp="item" className="hover:text-primary transition-colors">
+                <span itemProp="name">Mayo</span>
+              </Link>
+              <meta itemProp="position" content="1" />
             </li>
-            <li>/</li>
-            <li>
-              <span className="text-foreground font-medium">{location.city}</span>
+            <li aria-hidden="true">/</li>
+            <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <span itemProp="name" className="text-foreground font-medium">{location.city}</span>
+              <meta itemProp="position" content="2" />
             </li>
           </ol>
         </nav>
 
-        {/* Hero H1 */}
+        {/* H1 */}
         <section className="max-w-5xl mx-auto px-4 pb-8">
           <Link
             to="/"
@@ -59,17 +102,20 @@ const LocationPage = () => {
           </h1>
         </section>
 
-        {/* Intro text */}
-        <section className="max-w-5xl mx-auto px-4 pb-12">
+        {/* Intro */}
+        <section className="max-w-5xl mx-auto px-4 pb-12" aria-labelledby="intro-heading">
+          <h2 id="intro-heading" className="sr-only">
+            {language === 'fr' ? 'Présentation' : language === 'en' ? 'Overview' : 'Описание'}
+          </h2>
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
             <p>{tr.intro}</p>
           </div>
         </section>
 
         {/* Map */}
-        <section className="max-w-5xl mx-auto px-4 pb-12">
-          <h2 className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-primary" />
+        <section className="max-w-5xl mx-auto px-4 pb-12" aria-labelledby="map-heading">
+          <h2 id="map-heading" className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
             {language === 'fr' ? 'Notre emplacement' : language === 'en' ? 'Our location' : 'Наше расположение'}
           </h2>
           <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
@@ -77,7 +123,7 @@ const LocationPage = () => {
               title={`Carte Mayo ${location.city}`}
               width="100%"
               height="400"
-              style={{ border: 0 }}
+              style={{ border: 0, borderRadius: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               src={`https://www.openstreetmap.org/export/embed.html?bbox=${location.lng - 0.01},${location.lat - 0.007},${location.lng + 0.01},${location.lat + 0.007}&layer=mapnik&marker=${location.lat},${location.lng}`}
@@ -96,9 +142,9 @@ const LocationPage = () => {
         </section>
 
         {/* Landmarks */}
-        <section className="max-w-5xl mx-auto px-4 pb-16">
-          <h2 className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
-            <Navigation className="w-5 h-5 text-primary" />
+        <section className="max-w-5xl mx-auto px-4 pb-16" aria-labelledby="landmarks-heading">
+          <h2 id="landmarks-heading" className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
+            <Navigation className="w-5 h-5 text-primary" aria-hidden="true" />
             {language === 'fr' ? 'Points de repère à proximité' : language === 'en' ? 'Nearby landmarks' : 'Ближайшие ориентиры'}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -107,9 +153,9 @@ const LocationPage = () => {
                 key={i}
                 className="flex items-center gap-3 p-4 rounded-xl bg-accent/30 border border-border"
               >
-                <MapPin className="w-5 h-5 text-primary shrink-0" />
+                <MapPin className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="font-medium text-foreground">{lm.name}</p>
+                  <h3 className="font-medium text-foreground">{lm.name}</h3>
                   <p className="text-sm text-muted-foreground">{lm.distance}</p>
                 </div>
               </div>
@@ -118,9 +164,9 @@ const LocationPage = () => {
         </section>
 
         {/* CTA */}
-        <section className="bg-primary/5 py-12 px-4">
+        <section className="bg-primary/5 py-12 px-4" aria-labelledby="cta-heading">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
+            <h2 id="cta-heading" className="text-2xl font-bold text-foreground mb-4">
               {language === 'fr'
                 ? `Inscrivez votre enfant chez Mayo ${location.city}`
                 : language === 'en'
