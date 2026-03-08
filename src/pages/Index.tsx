@@ -13,6 +13,8 @@ import EcoFootprint from '@/components/EcoFootprint';
 import TrustBadges from '@/components/TrustBadges';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
+import SocialProofToast from '@/components/SocialProofToast';
+import ParentApp from '@/components/ParentApp';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/contexts/LanguageContext';
 
