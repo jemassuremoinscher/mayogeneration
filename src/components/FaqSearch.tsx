@@ -75,7 +75,7 @@ const trLabels = {
     ],
   },
   en: {
-    title: 'Ask your question about childcare in the 06',
+    title: 'Ask your question about childcare on the French Riviera',
     placeholder: 'E.g.: What aid is available for Monaco?',
     suggestionsTitle: 'Frequently asked',
     guideOffer: 'Would you like to receive our complete 2026 aid guide by email?',
