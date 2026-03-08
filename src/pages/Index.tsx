@@ -1,13 +1,15 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
-import DailyTimeline from '@/components/DailyTimeline';
+import RivieraTimeline from '@/components/RivieraTimeline';
 import Services from '@/components/Services';
+import IdealCareQuiz from '@/components/IdealCareQuiz';
 import Availability from '@/components/Availability';
 import ImmersiveVisit from '@/components/ImmersiveVisit';
 import FaqSearch from '@/components/FaqSearch';
 import QuizContact from '@/components/QuizContact';
 import CafSimulator from '@/components/CafSimulator';
+import EcoFootprint from '@/components/EcoFootprint';
 import TrustBadges from '@/components/TrustBadges';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
@@ -85,12 +87,14 @@ const Index = () => {
       <main className="min-h-screen">
         <Hero />
         <About />
-        <DailyTimeline />
+        <RivieraTimeline />
         <Services />
+        <IdealCareQuiz />
         <Availability />
         <ImmersiveVisit />
         <CafSimulator />
         <FaqSearch />
+        <EcoFootprint />
         <QuizContact />
       </main>
       <Footer />
