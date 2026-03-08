@@ -3,8 +3,9 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import DailyTimeline from '@/components/DailyTimeline';
 import Services from '@/components/Services';
-import Contact from '@/components/Contact';
+import QuizContact from '@/components/QuizContact';
 import CafSimulator from '@/components/CafSimulator';
+import TrustBadges from '@/components/TrustBadges';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
 import SEOHead from '@/components/SEOHead';
@@ -77,13 +78,14 @@ const Index = () => {
         jsonLd={jsonLd}
       />
       <Header />
+      <TrustBadges />
       <main className="min-h-screen">
         <Hero />
         <About />
         <DailyTimeline />
         <Services />
         <CafSimulator />
-        <Contact />
+        <QuizContact />
       </main>
       <Footer />
       <FloatingCTA />

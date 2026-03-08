@@ -1,29 +1,57 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { CalendarCheck } from 'lucide-react';
+import { Phone as PhoneIcon, ShieldCheck, Leaf, GraduationCap } from 'lucide-react';
 
 const ctaLabels = {
-  fr: 'Réserver une visite',
-  en: 'Book a visit',
-  ru: 'Записаться на визит',
+  fr: 'Appeler maintenant',
+  en: 'Call now',
+  ru: 'Позвонить',
 };
+
+const badges = [
+  { icon: ShieldCheck, fr: 'Agrément État', en: 'State Approved', ru: 'Гос. лицензия' },
+  { icon: Leaf, fr: 'Bio', en: 'Organic', ru: 'Био' },
+  { icon: GraduationCap, fr: 'Diplômée', en: 'Certified', ru: 'Диплом' },
+];
 
 const FloatingCTA = () => {
   const { language } = useLanguage();
 
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <button
-      onClick={scrollToContact}
-      className="md:hidden fixed bottom-6 left-4 right-4 z-40 flex items-center justify-center gap-2 bg-primary text-primary-foreground py-4 rounded-2xl font-semibold text-base shadow-lg active:scale-[0.98] transition-transform"
-      style={{ boxShadow: 'var(--shadow-premium)' }}
-      aria-label={ctaLabels[language]}
-    >
-      <CalendarCheck className="w-5 h-5" />
-      {ctaLabels[language]}
-    </button>
+    <>
+      {/* Mobile: sticky call bar + trust badges */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40">
+        {/* Trust badges row */}
+        <div className="flex items-center justify-center gap-3 bg-card/95 backdrop-blur-md border-t border-border px-4 py-2 lg:hidden">
+          {badges.map((badge, i) => {
+            const Icon = badge.icon;
+            return (
+              <div key={i} className="flex items-center gap-1.5">
+                <Icon className="w-3.5 h-3.5 text-sage" />
+                <span className="text-[10px] font-medium text-muted-foreground font-body">{badge[language]}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Call button */}
+        <a
+          href="tel:+33XXXXXXXXX"
+          className="flex items-center justify-center gap-2.5 py-4 px-6 font-semibold text-base font-body transition-all active:scale-[0.98]"
+          style={{
+            background: 'var(--gradient-sage)',
+            color: 'white',
+            boxShadow: '0 -4px 20px -4px hsl(143 18% 52% / 0.3)',
+          }}
+          aria-label={ctaLabels[language]}
+        >
+          <PhoneIcon className="w-5 h-5" />
+          {ctaLabels[language]}
+        </a>
+      </div>
+
+      {/* Spacer for mobile to avoid content being hidden behind fixed bar */}
+      <div className="md:hidden h-[88px]" />
+    </>
   );
 };
 
