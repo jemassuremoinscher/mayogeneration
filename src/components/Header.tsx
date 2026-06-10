@@ -96,6 +96,13 @@ const Header = () => {
             {b2bLabel}
           </Link>
 
+          <Link
+            to="/blog"
+            className={`text-sm font-medium transition-colors hover:text-primary ${textColor}`}
+          >
+            Blog
+          </Link>
+
           {/* Locations dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
