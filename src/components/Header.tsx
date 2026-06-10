@@ -32,13 +32,10 @@ const Header = () => {
 
   const b2bLabel = language === 'fr' ? 'Entreprises' : language === 'en' ? 'Corporate' : 'Бизнесу';
 
-  const blogLabel = language === 'fr' ? 'Blog' : language === 'en' ? 'Blog' : 'Блог';
-
   const navItems = [
     { key: 'nav.about', href: '/#about' },
     { key: 'nav.services', href: '/#services' },
     { key: 'nav.contact', href: '/#contact' },
-    { key: 'nav.blog', href: '/blog', label: blogLabel },
   ];
 
   const locLabel = language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли';
@@ -97,6 +94,13 @@ const Header = () => {
             className={`text-sm font-medium transition-colors hover:text-primary ${textColor}`}
           >
             {b2bLabel}
+          </Link>
+
+          <Link
+            to="/blog"
+            className={`text-sm font-medium transition-colors hover:text-primary ${textColor}`}
+          >
+            Blog
           </Link>
 
           {/* Locations dropdown */}
@@ -175,6 +179,14 @@ const Header = () => {
             className="block text-foreground font-medium py-2"
           >
             {b2bLabel}
+          </Link>
+
+          <Link
+            to="/blog"
+            onClick={() => setMobileOpen(false)}
+            className="block text-foreground font-medium py-2"
+          >
+            Blog
           </Link>
 
           {/* Mobile locations accordion */}
