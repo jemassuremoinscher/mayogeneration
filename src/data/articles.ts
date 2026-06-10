@@ -162,7 +162,7 @@ export const articles: Article[] = [
     },
     excerpt: {
       fr: "Pourquoi l'éveil simultané en français, anglais et russe transforme le développement de l'enfant.",
-      en: 'Why simultaneous exposure to French, English and Russian transforms a child's development.',
+      en: "Why simultaneous exposure to French, English and Russian transforms a child's development.",
       ru: 'Почему одновременное знакомство с тремя языками меняет развитие ребёнка.',
     },
     content: {
