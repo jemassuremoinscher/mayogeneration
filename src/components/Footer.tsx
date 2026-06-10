@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
 import { locations } from '@/data/locations';
 import logoMayo from '@/assets/logo-mayo.png';
+import CrossSiteLinks from '@/components/CrossSiteLinks';
 
 const Footer = () => {
   const { t, language } = useLanguage();
@@ -103,7 +104,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 pt-6 text-center">
+        <CrossSiteLinks />
+
+        <div className="border-t border-primary-foreground/20 pt-6 text-center mt-6">
           <p className="text-xs opacity-60">
             &copy; {year} Mayo. {t('footer.rights')}
           </p>
