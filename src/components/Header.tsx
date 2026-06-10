@@ -181,6 +181,14 @@ const Header = () => {
             {b2bLabel}
           </Link>
 
+          <Link
+            to="/blog"
+            onClick={() => setMobileOpen(false)}
+            className="block text-foreground font-medium py-2"
+          >
+            Blog
+          </Link>
+
           {/* Mobile locations accordion */}
           <button
             onClick={() => setMobileLocationsOpen(!mobileLocationsOpen)}
