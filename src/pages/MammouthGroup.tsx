@@ -36,6 +36,10 @@ const companies: Company[] = [
     name: 'Mayo Crèche',
     url: 'https://mayocreche.fr',
     icon: Baby,
+    logo: logoMayo,
+    color: '#7FB8DA',
+    logoBg: 'bg-sky-100',
+    invertLogo: false,
     tagline: {
       fr: 'Crèches multilingues & nursery privée sur la Côte d\'Azur',
       en: 'Multilingual nurseries & private childcare on the French Riviera',
@@ -51,9 +55,12 @@ const companies: Company[] = [
   },
   {
     slug: 'jemassuremoinscher',
-    name: "Je m'assure moins cher",
+    name: 'jemassuremoinscher.fr',
     url: 'https://jemassuremoinscher.fr',
     icon: Shield,
+    logo: logoInsurance,
+    color: '#F59E0B',
+    logoBg: 'bg-amber-50',
     tagline: {
       fr: 'Comparateur d\'assurances — 70+ assureurs en 2 minutes',
       en: 'Insurance comparator — 70+ insurers in 2 minutes',
@@ -72,6 +79,9 @@ const companies: Company[] = [
     name: 'Mammouth AI',
     url: 'https://mammouth-ai.com',
     icon: Sparkles,
+    logo: logoAI,
+    color: '#111827',
+    logoBg: 'bg-neutral-900',
     tagline: {
       fr: 'Agents IA et automatisation pour entrepreneurs',
       en: 'AI agents and automation for entrepreneurs',
@@ -90,6 +100,9 @@ const companies: Company[] = [
     name: 'Mammouth Motors',
     url: 'https://mammouthmotors.com',
     icon: Car,
+    logo: logoMotors,
+    color: '#1E3A8A',
+    logoBg: 'bg-blue-50',
     tagline: {
       fr: 'Export voitures Dubai → Afrique & gardiennage collection à Nice',
       en: 'Car export Dubai → Africa & classic car storage in Nice',
@@ -108,6 +121,9 @@ const companies: Company[] = [
     name: 'English for Future Leaders',
     url: 'https://effl.lovable.app',
     icon: GraduationCap,
+    logo: logoEffl,
+    color: '#7C2D12',
+    logoBg: 'bg-orange-50',
     tagline: {
       fr: 'Coaching premium d\'anglais business pour dirigeants',
       en: 'Premium business English coaching for executives',
