@@ -7,6 +7,11 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Shield, Sparkles, Car, GraduationCap, Baby, ExternalLink } from 'lucide-react';
 import groupHero from '@/assets/hero-nursery.jpg';
+import logoMayo from '@/assets/logo-mayo.png';
+import logoInsurance from '@/assets/partners/jemassuremoinscher.png';
+import logoAI from '@/assets/partners/mammouth-ai.png';
+import logoMotors from '@/assets/partners/mammouth-motors.png';
+import logoEffl from '@/assets/partners/effl.png';
 
 type Lang = 'fr' | 'en' | 'ru';
 
