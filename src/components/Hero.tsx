@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroImage from '@/assets/hero-nursery.jpg';
+import logoMayo from '@/assets/logo-mayo.png';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -26,8 +27,22 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/50 to-primary/70" aria-hidden="true" />
 
       <div className="relative z-10 text-center text-primary-foreground px-4 pt-16 max-w-4xl mx-auto animate-fade-in">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 drop-shadow-lg">
-          {t('hero.title')}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 drop-shadow-lg flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+          {(() => {
+            const parts = t('hero.title').split('Mayo');
+            return parts.map((part, i) => (
+              <span key={i} className="contents">
+                {part && <span>{part.trim()}</span>}
+                {i < parts.length - 1 && (
+                  <img
+                    src={logoMayo}
+                    alt="Mayo"
+                    className="inline-block !rounded-none brightness-0 invert h-[0.9em] w-auto align-baseline"
+                  />
+                )}
+              </span>
+            ));
+          })()}
         </h1>
         <p className="text-xl sm:text-2xl md:text-3xl mb-2 font-light drop-shadow-md">
           {t('hero.subtitle')}

@@ -9,6 +9,7 @@ import LocationPage from "./pages/LocationPage";
 import B2BPage from "./pages/B2BPage";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import MammouthGroup from "./pages/MammouthGroup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/entreprises" element={<B2BPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/mammouth-group" element={<MammouthGroup />} />
             <Route path="/:slug" element={<LocationPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
