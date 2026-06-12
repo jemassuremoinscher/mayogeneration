@@ -7,6 +7,11 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Shield, Sparkles, Car, GraduationCap, Baby, ExternalLink } from 'lucide-react';
 import groupHero from '@/assets/hero-nursery.jpg';
+import logoMayo from '@/assets/logo-mayo.png';
+import logoInsurance from '@/assets/partners/jemassuremoinscher.png';
+import logoAI from '@/assets/partners/mammouth-ai.png';
+import logoMotors from '@/assets/partners/mammouth-motors.png';
+import logoEffl from '@/assets/partners/effl.png';
 
 type Lang = 'fr' | 'en' | 'ru';
 
@@ -15,6 +20,10 @@ interface Company {
   name: string;
   url: string;
   icon: typeof Shield;
+  logo: string;
+  color: string; // brand hex
+  logoBg: string; // tailwind bg class for logo container
+  invertLogo?: boolean;
   tagline: Record<Lang, string>;
   description: Record<Lang, string>;
   geo: Record<Lang, string>;
@@ -27,6 +36,10 @@ const companies: Company[] = [
     name: 'Mayo Crèche',
     url: 'https://mayocreche.fr',
     icon: Baby,
+    logo: logoMayo,
+    color: '#7FB8DA',
+    logoBg: 'bg-sky-100',
+    invertLogo: false,
     tagline: {
       fr: 'Crèches multilingues & nursery privée sur la Côte d\'Azur',
       en: 'Multilingual nurseries & private childcare on the French Riviera',
@@ -42,9 +55,12 @@ const companies: Company[] = [
   },
   {
     slug: 'jemassuremoinscher',
-    name: "Je m'assure moins cher",
+    name: 'jemassuremoinscher.fr',
     url: 'https://jemassuremoinscher.fr',
     icon: Shield,
+    logo: logoInsurance,
+    color: '#F59E0B',
+    logoBg: 'bg-amber-50',
     tagline: {
       fr: 'Comparateur d\'assurances — 70+ assureurs en 2 minutes',
       en: 'Insurance comparator — 70+ insurers in 2 minutes',
@@ -63,6 +79,9 @@ const companies: Company[] = [
     name: 'Mammouth AI',
     url: 'https://mammouth-ai.com',
     icon: Sparkles,
+    logo: logoAI,
+    color: '#111827',
+    logoBg: 'bg-neutral-900',
     tagline: {
       fr: 'Agents IA et automatisation pour entrepreneurs',
       en: 'AI agents and automation for entrepreneurs',
@@ -81,6 +100,9 @@ const companies: Company[] = [
     name: 'Mammouth Motors',
     url: 'https://mammouthmotors.com',
     icon: Car,
+    logo: logoMotors,
+    color: '#1E3A8A',
+    logoBg: 'bg-blue-50',
     tagline: {
       fr: 'Export voitures Dubai → Afrique & gardiennage collection à Nice',
       en: 'Car export Dubai → Africa & classic car storage in Nice',
@@ -99,6 +121,9 @@ const companies: Company[] = [
     name: 'English for Future Leaders',
     url: 'https://effl.lovable.app',
     icon: GraduationCap,
+    logo: logoEffl,
+    color: '#7C2D12',
+    logoBg: 'bg-orange-50',
     tagline: {
       fr: 'Coaching premium d\'anglais business pour dirigeants',
       en: 'Premium business English coaching for executives',
@@ -215,15 +240,34 @@ const MammouthGroup = () => {
                 return (
                   <Card
                     key={c.slug}
-                    className="border border-border/60 bg-card/80 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 flex flex-col"
+                    className="relative overflow-hidden border border-border/60 bg-card/80 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 flex flex-col group"
                     style={{ boxShadow: 'var(--shadow-card)' }}
                   >
+                    <div
+                      className="absolute top-0 left-0 right-0 h-1"
+                      style={{ background: c.color }}
+                      aria-hidden="true"
+                    />
                     <CardContent className="p-6 sm:p-8 flex flex-col flex-1">
-                      <div className="w-14 h-14 rounded-2xl bg-primary/8 flex items-center justify-center mb-4">
-                        <Icon className="w-7 h-7 text-primary" />
+                      <div className="flex items-center gap-4 mb-4">
+                        <div
+                          className={`w-16 h-16 rounded-2xl ${c.logoBg} flex items-center justify-center shrink-0 p-2 border border-border/40`}
+                        >
+                          <img
+                            src={c.logo}
+                            alt={`${c.name} logo`}
+                            className="max-w-full max-h-full object-contain !rounded-none"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Icon className="w-5 h-5" style={{ color: c.color }} />
+                          <h3 className="text-xl font-semibold text-foreground">{c.name}</h3>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-1">{c.name}</h3>
-                      <p className="text-sm font-medium text-primary mb-3">{c.tagline[language]}</p>
+                      <p className="text-sm font-medium mb-3" style={{ color: c.color }}>
+                        {c.tagline[language]}
+                      </p>
                       <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
                         {c.description[language]}
                       </p>
@@ -234,7 +278,8 @@ const MammouthGroup = () => {
                         href={c.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline transition-colors"
+                        style={{ color: c.color }}
                       >
                         {c.cta[language]} <ExternalLink className="w-3.5 h-3.5" />
                       </a>

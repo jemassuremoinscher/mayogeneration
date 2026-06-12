@@ -37,7 +37,7 @@ const Hero = () => {
                   <img
                     src={logoMayo}
                     alt="Mayo"
-                    className="inline-block !rounded-none brightness-0 invert h-[0.9em] w-auto align-baseline"
+                    className="inline-block !rounded-none brightness-0 invert h-[1.35em] w-auto align-middle -translate-y-[0.05em]"
                   />
                 )}
               </span>
