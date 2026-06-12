@@ -103,6 +103,13 @@ const Header = () => {
             Blog
           </Link>
 
+          <Link
+            to="/mammouth-group"
+            className={`text-sm font-medium transition-colors hover:text-primary ${textColor}`}
+          >
+            Mammouth Group
+          </Link>
+
           {/* Locations dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -187,6 +194,14 @@ const Header = () => {
             className="block text-foreground font-medium py-2"
           >
             Blog
+          </Link>
+
+          <Link
+            to="/mammouth-group"
+            onClick={() => setMobileOpen(false)}
+            className="block text-foreground font-medium py-2"
+          >
+            Mammouth Group
           </Link>
 
           {/* Mobile locations accordion */}
