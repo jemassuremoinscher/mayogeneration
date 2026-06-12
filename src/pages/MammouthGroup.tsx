@@ -20,6 +20,10 @@ interface Company {
   name: string;
   url: string;
   icon: typeof Shield;
+  logo: string;
+  color: string; // brand hex
+  logoBg: string; // tailwind bg class for logo container
+  invertLogo?: boolean;
   tagline: Record<Lang, string>;
   description: Record<Lang, string>;
   geo: Record<Lang, string>;
