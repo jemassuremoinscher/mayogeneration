@@ -1,24 +1,70 @@
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import heroImage from '@/assets/hero-nursery.jpg';
 import logoMayo from '@/assets/logo-mayo.png';
 
 const Hero = () => {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    // Desktop-only parallax. Skip on mobile and when user prefers reduced motion.
+    const mqDesktop = window.matchMedia('(min-width: 768px)');
+    const mqReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!mqDesktop.matches || mqReduced.matches) {
+      setOffset(0);
+      return;
+    }
+
+    let ticking = false;
+    const update = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      // Progress: 0 when hero top at viewport top, 1 when hero bottom leaves viewport top
+      const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || vh)));
+      setOffset(progress);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  const bgTransform = `translate3d(0, ${offset * 120}px, 0) scale(${1 + offset * 0.06})`;
+  const contentTransform = `translate3d(0, ${offset * -60}px, 0)`;
+  const contentOpacity = 1 - Math.min(1, offset * 1.4);
+
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-[100svh] flex items-center justify-center overflow-hidden"
       aria-label={t('hero.title')}
     >
       <img
         src={heroImage}
         alt={t('hero.title')}
-        className="absolute inset-0 w-full h-full object-cover !rounded-none"
+        className="absolute inset-0 w-full h-full object-cover !rounded-none will-change-transform"
+        style={{ transform: bgTransform }}
         loading="eager"
         {...{ fetchpriority: "high" } as any}
         width="1920"
@@ -26,7 +72,10 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/50 to-primary/70" aria-hidden="true" />
 
-      <div className="relative z-10 text-center text-primary-foreground px-4 pt-16 max-w-4xl mx-auto animate-fade-in">
+      <div
+        className="relative z-10 text-center text-primary-foreground px-4 pt-16 max-w-4xl mx-auto animate-fade-in will-change-transform"
+        style={{ transform: contentTransform, opacity: contentOpacity }}
+      >
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 drop-shadow-lg flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
           {(() => {
             const parts = t('hero.title').split('Mayo');
