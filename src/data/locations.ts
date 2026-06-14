@@ -213,4 +213,52 @@ export const locations: Location[] = [
       },
     },
   },
+  {
+    slug: 'creche-sophia-antipolis',
+    city: 'Sophia Antipolis',
+    comingSoon: true,
+    lat: 43.6165,
+    lng: 7.0556,
+    translations: {
+      fr: {
+        h1: 'Crèche et Garde d\'enfants à Sophia Antipolis',
+        metaTitle: 'Crèche Multilingue Sophia Antipolis | Mayo – Nursery Privée Côte d\'Azur',
+        metaDescription: 'Mayo, micro-crèche et nursery privée multilingue à Sophia Antipolis. Garde d\'enfants personnalisée en français, anglais et russe sur la Côte d\'Azur.',
+        intro: 'Mayo Sophia Antipolis accueille les enfants des familles actives du pôle technologique et des communes environnantes (Biot, Valbonne, Mougins). Notre micro-crèche multilingue propose un accompagnement personnalisé en français, anglais et russe, idéal pour les parents internationaux travaillant dans les entreprises de la technopole. Les espaces sont conçus pour stimuler l\'éveil avec des activités scientifiques et artistiques adaptées aux tout-petits. Les repas sont préparés sur place avec des produits bio et locaux. Nous offrons des horaires flexibles et un accueil du lundi au vendredi de 8h à 18h. Le jardin extérieur sécurisé permet aux enfants de profiter du climat méditerranéen. Notre équipe plurilingue assure une immersion naturelle dans trois langues dès le plus jeune âge.',
+        landmarks: [
+          { name: 'Pôle technologique Sophia Antipolis', distance: '3 min à pied' },
+          { name: 'Village de Biot', distance: '5 min à pied' },
+          { name: 'Parc de la Brague', distance: '8 min à pied' },
+          { name: 'Polygone Riviera', distance: '10 min à pied' },
+          { name: 'Gare d\'Antibes', distance: '12 min en voiture' },
+        ],
+      },
+      en: {
+        h1: 'Nursery & Childcare in Sophia Antipolis',
+        metaTitle: 'Multilingual Nursery Sophia Antipolis | Mayo – Private Childcare French Riviera',
+        metaDescription: 'Mayo, multilingual private nursery in Sophia Antipolis. Personalized childcare in French, English and Russian on the French Riviera.',
+        intro: 'Mayo Sophia Antipolis welcomes children from active families in the technology park and surrounding towns (Biot, Valbonne, Mougins). Our multilingual nursery offers personalized care in French, English, and Russian — ideal for international parents working in the technopole companies. Spaces are designed to stimulate early learning with science and art activities adapted for toddlers. Meals are prepared on-site with organic and local products. We offer flexible hours and Monday to Friday care from 8am to 6pm. The secure outdoor garden lets children enjoy the Mediterranean climate. Our multilingual team ensures natural immersion in three languages from an early age.',
+        landmarks: [
+          { name: 'Sophia Antipolis Technology Park', distance: '3 min walk' },
+          { name: 'Biot Village', distance: '5 min walk' },
+          { name: 'Brague Park', distance: '8 min walk' },
+          { name: 'Polygone Riviera Mall', distance: '10 min walk' },
+          { name: 'Antibes Station', distance: '12 min drive' },
+        ],
+      },
+      ru: {
+        h1: 'Детский сад и присмотр за детьми в София-Антиполис',
+        metaTitle: 'Многоязычный детский сад София-Антиполис | Mayo – Частный детский сад Лазурный Берег',
+        metaDescription: 'Mayo – многоязычный частный детский сад в София-Антиполис. Индивидуальный уход на французском, английском и русском на Лазурном Берегу.',
+        intro: 'Mayo София-Антиполис принимает детей из семей, работающих в технологическом парке и близлежащих коммунах (Био, Вальбонн, Мужен). Наш многоязычный детский сад предлагает индивидуальный уход на французском, английском и русском языках — идеально для международных родителей, работающих в компаниях технополиса. Пространства спроектированы для стимулирования развития с научными и художественными занятиями для малышей. Питание готовится на месте из органических местных продуктов. Мы предлагаем гибкий график с приёмом с понедельника по пятницу с 8:00 до 18:00. Закрытый сад позволяет детям наслаждаться средиземноморским климатом. Наша многоязычная команда обеспечивает естественное погружение в три языка с раннего возраста.',
+        landmarks: [
+          { name: 'Технопарк София-Антиполис', distance: '3 мин пешком' },
+          { name: 'Деревня Био', distance: '5 мин пешком' },
+          { name: 'Парк Браг', distance: '8 мин пешком' },
+          { name: 'Торговый центр Polygone Riviera', distance: '10 мин пешком' },
+          { name: 'Вокзал Антиб', distance: '12 мин на машине' },
+        ],
+      },
+    },
+  },
 ];

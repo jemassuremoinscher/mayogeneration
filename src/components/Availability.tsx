@@ -18,6 +18,7 @@ const establishments: Establishment[] = [
   { city: 'Cannes', slug: 'creche-cannes', occupancy: 0, totalSpots: 12, filledSpots: 0, comingSoon: true },
   { city: 'Antibes', slug: 'creche-antibes', occupancy: 0, totalSpots: 12, filledSpots: 0, comingSoon: true },
   { city: 'Monaco', slug: 'creche-monaco', occupancy: 0, totalSpots: 10, filledSpots: 0, comingSoon: true },
+  { city: 'Sophia Antipolis', slug: 'creche-sophia-antipolis', occupancy: 0, totalSpots: 12, filledSpots: 0, comingSoon: true },
 ];
 
 const tr = {

@@ -68,6 +68,7 @@ const jsonLd = {
     { '@type': 'City', name: 'Cannes' },
     { '@type': 'City', name: 'Antibes' },
     { '@type': 'City', name: 'Monaco' },
+    { '@type': 'City', name: 'Sophia Antipolis' },
   ],
   priceRange: '€€',
   aggregateRating: {
