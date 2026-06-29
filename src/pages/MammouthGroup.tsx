@@ -13,7 +13,7 @@ import logoAI from '@/assets/partners/mammouth-ai.png';
 import logoMotors from '@/assets/partners/mammouth-motors.png';
 import logoEffl from '@/assets/partners/effl.png';
 
-type Lang = 'fr' | 'en' | 'ru' | 'it';
+type Lang = 'fr' | 'en' | 'ru';
 
 interface Company {
   slug: string;
