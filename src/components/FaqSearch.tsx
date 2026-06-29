@@ -112,16 +112,16 @@ function findAnswer(query: string, language: 'fr' | 'en' | 'ru' | 'it'): string 
   const q = query.toLowerCase();
   for (const entry of faqData) {
     if (entry.keywords.some((kw) => q.includes(kw))) {
-      return entry.answer[language];
+      return entry.((answer as any)[language] ?? (answer as any).en ?? (answer as any).fr);
     }
   }
-  return defaultAnswer[language];
+  return ((defaultAnswer as any)[language] ?? (defaultAnswer as any).en ?? (defaultAnswer as any).fr);
 }
 
 const FaqSearch = () => {
   const { language } = useLanguage();
   const reveal = useScrollReveal();
-  const t = trLabels[language];
+  const t = ((trLabels as any)[language] ?? (trLabels as any).en ?? (trLabels as any).fr);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [query, setQuery] = useState('');

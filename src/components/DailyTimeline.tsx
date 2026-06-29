@@ -122,15 +122,15 @@ const DailyTimeline = () => {
       id="journee"
       className="py-16 sm:py-24 px-4"
       style={{ background: 'var(--gradient-soft)' }}
-      aria-label={sectionTitles[language]}
+      aria-label={((sectionTitles as any)[language] ?? (sectionTitles as any).en ?? (sectionTitles as any).fr)}
     >
       <div ref={reveal.ref} style={reveal.style} className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
-            {sectionTitles[language]}
+            {((sectionTitles as any)[language] ?? (sectionTitles as any).en ?? (sectionTitles as any).fr)}
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
-            {sectionSubtitles[language]}
+            {((sectionSubtitles as any)[language] ?? (sectionSubtitles as any).en ?? (sectionSubtitles as any).fr)}
           </p>
         </div>
 
@@ -165,10 +165,10 @@ const DailyTimeline = () => {
             {steps.map((step, i) => (
               <div key={i} className="text-center px-1">
                 <h3 className="text-sm font-semibold text-foreground mb-1 leading-tight">
-                  {step.titles[language]}
+                  {step.((titles as any)[language] ?? (titles as any).en ?? (titles as any).fr)}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  {step.descriptions[language]}
+                  {step.((descriptions as any)[language] ?? (descriptions as any).en ?? (descriptions as any).fr)}
                 </p>
               </div>
             ))}
@@ -191,10 +191,10 @@ const DailyTimeline = () => {
                 <div>
                   <span className="text-xs font-bold text-primary tracking-wide">{step.time}</span>
                   <h3 className="text-base font-semibold text-foreground leading-tight mt-0.5">
-                    {step.titles[language]}
+                    {step.((titles as any)[language] ?? (titles as any).en ?? (titles as any).fr)}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mt-1">
-                    {step.descriptions[language]}
+                    {step.((descriptions as any)[language] ?? (descriptions as any).en ?? (descriptions as any).fr)}
                   </p>
                 </div>
               </li>

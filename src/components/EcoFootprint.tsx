@@ -71,7 +71,7 @@ function useCountUp(target: number, visible: boolean, duration = 1500) {
 const EcoFootprint = () => {
   const { language } = useLanguage();
   const reveal = useScrollReveal();
-  const t = trLabels[language];
+  const t = ((trLabels as any)[language] ?? (trLabels as any).en ?? (trLabels as any).fr);
 
   return (
     <section
@@ -97,7 +97,7 @@ const EcoFootprint = () => {
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
           {counters.map((counter, i) => {
             const Icon = counter.icon;
-            const content = counter[language];
+            const content = ((counter as any)[language] ?? (counter as any).en ?? (counter as any).fr);
             const animatedCount = useCountUp(counter.target, reveal.visible);
 
             return (

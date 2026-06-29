@@ -52,7 +52,7 @@ const tr = {
 const ImmersiveVisit = () => {
   const { language } = useLanguage();
   const reveal = useScrollReveal();
-  const t = tr[language];
+  const t = ((tr as any)[language] ?? (tr as any).en ?? (tr as any).fr);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState('');
