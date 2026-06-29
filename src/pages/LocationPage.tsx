@@ -1,11 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { locations } from '@/data/locations';
+import { useLanguage, HIGHLIGHTED_LANG_LABEL } from '@/contexts/LanguageContext';
+import { locations, getLocationTranslation } from '@/data/locations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEOHead from '@/components/SEOHead';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
-import { MapPin, Navigation, ArrowLeft } from 'lucide-react';
+import { MapPin, Navigation, ArrowLeft, Star, AlertCircle, Languages } from 'lucide-react';
 
 const baseUrl = 'https://mayo-nice.fr';
 
@@ -31,7 +31,12 @@ const LocationPage = () => {
     );
   }
 
-  const tr = location.translations[language];
+  const tr = getLocationTranslation(location, language);
+  const isPriority = !!location.priorityOpening;
+  const highlightLabel = HIGHLIGHTED_LANG_LABEL[language][location.highlightedLanguage];
+  const goWaitlist = () => {
+    try { sessionStorage.setItem('mayo:preferred_site', location.slug); } catch {}
+  };
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -99,18 +104,23 @@ const LocationPage = () => {
             <ArrowLeft className="w-4 h-4" />
             {language === 'fr' ? 'Retour à l\'accueil' : language === 'en' ? 'Back to home' : 'На главную'}
           </Link>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight flex flex-wrap items-center gap-3">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
             {tr.h1}
-            {!location.comingSoon && (
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1 whitespace-nowrap">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                </span>
-                {language === 'fr' ? 'Dernières places disponibles pour Septembre 2026' : language === 'en' ? 'Last spots available for September 2026' : 'Последние места на сентябрь 2026'}
-              </span>
-            )}
           </h1>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${isPriority ? 'bg-primary text-primary-foreground' : 'bg-amber-100 text-amber-900'}`}>
+              {isPriority ? <Star className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
+              {isPriority ? t('status.priority') : t('status.waitlist')}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-medium">
+              <Languages className="w-3.5 h-3.5" />
+              {t('lang.highlighted')} : {highlightLabel}
+            </span>
+          </div>
+          {location.tagline && (
+            <p className="mt-4 text-lg text-muted-foreground italic">{location.tagline[language as 'fr' | 'en' | 'ru' | 'it'] || location.tagline.fr}</p>
+          )}
+          <p className="mt-2 text-xs text-muted-foreground/80">{t('lang.networkNote')}</p>
         </section>
 
         {/* Intro */}
@@ -187,9 +197,10 @@ const LocationPage = () => {
             </h2>
             <a
               href="/#contact"
+              onClick={goWaitlist}
               className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors"
             >
-              {t('hero.cta')}
+              {isPriority ? t('hero.cta') : t('cta.waitlist')}
             </a>
           </div>
         </section>

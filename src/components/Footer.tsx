@@ -17,7 +17,7 @@ const Footer = () => {
       en: `Private nursery ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
       ru: `Частный детский сад ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
     };
-    return { label: labels[language], slug: loc.slug, comingSoon: loc.comingSoon };
+    return { label: ((labels as any)[language] ?? (labels as any).en ?? (labels as any).fr), slug: loc.slug, comingSoon: loc.comingSoon };
   });
 
   return (
@@ -79,7 +79,7 @@ const Footer = () => {
                     to="/"
                     className="text-sm opacity-70 hover:opacity-100 hover:underline transition-opacity"
                   >
-                    {item[language]}
+                    {((item as any)[language] ?? (item as any).en ?? (item as any).fr)}
                   </Link>
                 </li>
               ))}

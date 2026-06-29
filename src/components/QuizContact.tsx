@@ -1,73 +1,45 @@
-import { useState } from 'react';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useEffect, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Baby, MapPin, Clock, Phone, ArrowRight, ArrowLeft, Check, Sparkles } from 'lucide-react';
-
-type Step = 0 | 1 | 2 | 3;
-
-const ageOptions = [
-  { value: '0-6m', fr: '0 – 6 mois', en: '0 – 6 months', ru: '0 – 6 месяцев' },
-  { value: '6-12m', fr: '6 – 12 mois', en: '6 – 12 months', ru: '6 – 12 месяцев' },
-  { value: '1-2y', fr: '1 – 2 ans', en: '1 – 2 years', ru: '1 – 2 года' },
-  { value: '2-3y', fr: '2 – 3 ans', en: '2 – 3 years', ru: '2 – 3 года' },
-];
-
-const cityOptions = [
-  { value: 'nice', label: 'Nice' },
-  { value: 'cannes', label: 'Cannes' },
-  { value: 'antibes', label: 'Antibes' },
-  { value: 'monaco', label: 'Monaco' },
-];
-
-const freqOptions = [
-  { value: '5j', fr: '5 jours / semaine', en: '5 days / week', ru: '5 дней / неделя' },
-  { value: '4j', fr: '4 jours / semaine', en: '4 days / week', ru: '4 дня / неделя' },
-  { value: '3j', fr: '3 jours / semaine', en: '3 days / week', ru: '3 дня / неделя' },
-  { value: '2j', fr: '2 jours / semaine', en: '2 days / week', ru: '2 дня / неделя' },
-];
+import { locations } from '@/data/locations';
+import { Mail, MapPin, Check, ArrowRight } from 'lucide-react';
 
 const tr = {
   fr: {
-    title: 'Trouvez votre place en 30 secondes',
-    subtitle: 'Répondez à 4 questions rapides',
-    step1: 'Quel âge a votre enfant ?',
-    step2: 'Dans quelle ville ?',
-    step3: 'Quelle fréquence ?',
-    step4: 'Votre numéro pour être rappelé(e)',
-    phonePlaceholder: '06 XX XX XX XX',
-    back: 'Retour',
-    next: 'Suivant',
-    submit: 'Recevoir mon devis personnalisé',
-    success: 'Merci ! Nous vous recontactons sous 24h.',
-    stepOf: 'sur',
+    title: 'Recevez les disponibilités de votre secteur',
+    subtitle: 'Laissez-nous votre email : on vous envoie les disponibilités de votre secteur et votre estimation d\'aides CMG.',
+    email: 'Votre email',
+    site: 'Secteur souhaité (optionnel)',
+    sitePlaceholder: '— Choisir un secteur —',
+    submit: 'Recevoir les disponibilités de mon secteur',
+    success: 'Merci, c\'est noté. Nous revenons vers vous sous 48 h.',
   },
   en: {
-    title: 'Find your spot in 30 seconds',
-    subtitle: 'Answer 4 quick questions',
-    step1: 'How old is your child?',
-    step2: 'Which city?',
-    step3: 'How often?',
-    step4: 'Your number to be called back',
-    phonePlaceholder: '+33 6 XX XX XX XX',
-    back: 'Back',
-    next: 'Next',
-    submit: 'Get my personalized quote',
-    success: 'Thank you! We\'ll get back to you within 24h.',
-    stepOf: 'of',
+    title: 'Get availability for your area',
+    subtitle: 'Leave us your email: we\'ll send you area availability and your CMG aid estimate.',
+    email: 'Your email',
+    site: 'Preferred area (optional)',
+    sitePlaceholder: '— Choose an area —',
+    submit: 'Receive my area availability',
+    success: 'Thanks, noted. We\'ll get back to you within 48h.',
   },
   ru: {
-    title: 'Найдите место за 30 секунд',
-    subtitle: 'Ответьте на 4 быстрых вопроса',
-    step1: 'Сколько лет вашему ребёнку?',
-    step2: 'В каком городе?',
-    step3: 'Как часто?',
-    step4: 'Ваш номер для обратного звонка',
-    phonePlaceholder: '+33 6 XX XX XX XX',
-    back: 'Назад',
-    next: 'Далее',
-    submit: 'Получить персональное предложение',
-    success: 'Спасибо! Мы перезвоним в течение 24 часов.',
-    stepOf: 'из',
+    title: 'Получите наличие мест в вашем районе',
+    subtitle: 'Оставьте email: мы пришлём наличие мест и оценку пособия CMG.',
+    email: 'Ваш email',
+    site: 'Желаемый район (опционально)',
+    sitePlaceholder: '— Выбрать район —',
+    submit: 'Получить наличие мест',
+    success: 'Спасибо! Мы свяжемся с вами в течение 48 часов.',
+  },
+  it: {
+    title: 'Ricevi le disponibilità della tua zona',
+    subtitle: 'Lasciaci la tua email: ti inviamo le disponibilità della tua zona e la stima degli aiuti CMG.',
+    email: 'La tua email',
+    site: 'Zona desiderata (opzionale)',
+    sitePlaceholder: '— Scegli una zona —',
+    submit: 'Ricevi le disponibilità della mia zona',
+    success: 'Grazie, abbiamo registrato la tua richiesta. Ti ricontatteremo entro 48 ore.',
   },
 };
 
@@ -76,179 +48,79 @@ const QuizContact = () => {
   const reveal = useScrollReveal();
   const t = tr[language];
 
-  const [step, setStep] = useState<Step>(0);
-  const [age, setAge] = useState('');
-  const [city, setCity] = useState('');
-  const [freq, setFreq] = useState('');
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [site, setSite] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handlePhoneChange = (v: string) => {
-    const cleaned = v.replace(/[^\d\s+]/g, '').slice(0, 18);
-    setPhone(cleaned);
+  // Pré-remplir depuis le clic « Liste d'attente prioritaire » d'une carte
+  useEffect(() => {
+    try {
+      const s = sessionStorage.getItem('mayo:preferred_site');
+      if (s) setSite(s);
+    } catch {}
+  }, []);
+
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!valid) return;
+    setSubmitted(true);
+    try {
+      fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'rappel', email, preferred_site: site || null, language }),
+      }).catch(() => {});
+    } catch {}
   };
-
-  const canNext = () => {
-    if (step === 0) return !!age;
-    if (step === 1) return !!city;
-    if (step === 2) return !!freq;
-    if (step === 3) return phone.replace(/\s/g, '').length >= 10;
-    return false;
-  };
-
-  const handleSubmit = () => {
-    if (canNext()) setSubmitted(true);
-  };
-
-  const stepIcons = [Baby, MapPin, Clock, Phone];
-  const stepQuestions = [t.step1, t.step2, t.step3, t.step4];
-  const CurrentIcon = stepIcons[step];
-
-  const renderOptions = (
-    options: { value: string; [key: string]: string }[],
-    selected: string,
-    onSelect: (v: string) => void,
-    labelKey?: string
-  ) => (
-    <div className="grid grid-cols-2 gap-3">
-      {options.map((opt) => {
-        const label = labelKey ? opt[labelKey] : (opt[language as Language] || opt.label);
-        const isSelected = selected === opt.value;
-        return (
-          <button
-            key={opt.value}
-            onClick={() => { onSelect(opt.value); if (step < 3) setTimeout(() => setStep((s) => Math.min(3, s + 1) as Step), 250); }}
-            className={`relative px-4 py-4 rounded-2xl border-2 text-sm font-medium transition-all duration-200 ${
-              isSelected
-                ? 'border-sage bg-sage-light text-sage shadow-[var(--shadow-sage)]'
-                : 'border-border bg-card text-foreground hover:border-sage/40 hover:bg-sage-light/50'
-            }`}
-          >
-            {isSelected && (
-              <Check className="absolute top-2 right-2 w-4 h-4 text-sage" />
-            )}
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  );
 
   if (submitted) {
     return (
       <section id="contact" className="py-16 sm:py-24 px-4" style={{ background: 'var(--gradient-soft)' }}>
         <div ref={reveal.ref} style={reveal.style} className="max-w-lg mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-sage-light mb-6">
-            <Check className="w-10 h-10 text-sage" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
+            <Check className="w-10 h-10 text-primary" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground font-display mb-4">{t.success}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">{t.success}</h2>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="contact" className="py-16 sm:py-24 px-4" style={{ background: 'var(--gradient-soft)' }} aria-labelledby="quiz-title">
+    <section id="contact" className="py-16 sm:py-24 px-4" style={{ background: 'var(--gradient-soft)' }} aria-labelledby="contact-title">
       <div ref={reveal.ref} style={reveal.style} className="max-w-lg mx-auto">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-sage-light text-sage rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4" />
-            {t.subtitle}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-3">
+            <Mail className="w-6 h-6 text-primary" />
           </div>
-          <h2 id="quiz-title" className="text-3xl sm:text-4xl font-bold text-foreground font-display">
-            {t.title}
-          </h2>
+          <h2 id="contact-title" className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{t.title}</h2>
+          <p className="text-muted-foreground mt-3 text-sm">{t.subtitle}</p>
         </div>
 
-        {/* Progress */}
-        <div className="flex items-center gap-2 mb-8">
-          {[0, 1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                i <= step ? 'bg-sage' : 'bg-border'
-              }`}
-            />
-          ))}
-          <span className="text-xs text-muted-foreground font-body ml-2 whitespace-nowrap">
-            {step + 1} {t.stepOf} 4
-          </span>
-        </div>
-
-        {/* Card */}
-        <div className="bg-card rounded-3xl border border-border p-6 sm:p-8" style={{ boxShadow: 'var(--shadow-premium)' }}>
-          {/* Step icon + question */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-11 h-11 rounded-2xl bg-sage-light flex items-center justify-center shrink-0">
-              <CurrentIcon className="w-5 h-5 text-sage" />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground font-display">{stepQuestions[step]}</h3>
+        <form onSubmit={handleSubmit} className="bg-card rounded-3xl border border-border p-6 sm:p-8 space-y-4" style={{ boxShadow: 'var(--shadow-premium)' }}>
+          <div>
+            <label className="text-xs text-muted-foreground mb-1.5 flex items-center gap-1.5"><Mail className="w-3 h-3" />{t.email}</label>
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email"
+              className="w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm focus:outline-none focus:border-primary" />
           </div>
-
-          {/* Content */}
-          <div className="min-h-[160px]">
-            {step === 0 && renderOptions(ageOptions, age, setAge)}
-            {step === 1 && renderOptions(cityOptions, city, setCity, 'label')}
-            {step === 2 && renderOptions(freqOptions, freq, setFreq)}
-            {step === 3 && (
-              <div>
-                <input
-                  type="tel"
-                  inputMode="tel"
-                  value={phone}
-                  onChange={(e) => handlePhoneChange(e.target.value)}
-                  placeholder={t.phonePlaceholder}
-                  className="w-full rounded-2xl border-2 border-border bg-background px-5 py-4 text-lg text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all font-body"
-                  autoComplete="tel"
-                  autoFocus
-                />
-              </div>
-            )}
+          <div>
+            <label className="text-xs text-muted-foreground mb-1.5 flex items-center gap-1.5"><MapPin className="w-3 h-3" />{t.site}</label>
+            <select value={site} onChange={(e) => setSite(e.target.value)}
+              className="w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm focus:outline-none focus:border-primary">
+              <option value="">{t.sitePlaceholder}</option>
+              {locations.map((l) => (
+                <option key={l.slug} value={l.slug}>{l.city}</option>
+              ))}
+            </select>
           </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-border/60">
-            <button
-              onClick={() => setStep((s) => Math.max(0, s - 1) as Step)}
-              disabled={step === 0}
-              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors disabled:opacity-0 disabled:pointer-events-none font-body"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              {t.back}
-            </button>
-
-            {step < 3 ? (
-              <button
-                onClick={() => canNext() && setStep((s) => Math.min(3, s + 1) as Step)}
-                disabled={!canNext()}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed font-body"
-                style={{
-                  background: canNext() ? 'var(--gradient-sage)' : undefined,
-                  color: canNext() ? 'white' : undefined,
-                  boxShadow: canNext() ? 'var(--shadow-sage)' : undefined,
-                }}
-              >
-                {t.next}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                disabled={!canNext()}
-                className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed font-body"
-                style={{
-                  background: canNext() ? 'var(--gradient-sage)' : undefined,
-                  color: canNext() ? 'white' : undefined,
-                  boxShadow: canNext() ? 'var(--shadow-sage)' : undefined,
-                }}
-              >
-                {t.submit}
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-        </div>
+          <button type="submit" disabled={!valid}
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ background: valid ? 'var(--gradient-primary)' : undefined, color: valid ? 'white' : undefined, boxShadow: valid ? 'var(--shadow-sage)' : undefined }}>
+            {t.submit} <ArrowRight className="w-4 h-4" />
+          </button>
+        </form>
       </div>
     </section>
   );

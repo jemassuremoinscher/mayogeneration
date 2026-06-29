@@ -98,7 +98,7 @@ const jsonLd = {
 
 const Index = () => {
   const { language } = useLanguage();
-  const m = meta[language];
+  const m = ((meta as any)[language] ?? (meta as any).en ?? (meta as any).fr);
 
   return (
     <>
@@ -112,12 +112,12 @@ const Index = () => {
       <TrustBadges />
       <main className="min-h-screen">
         <Hero />
+        <Availability />
+        <ImmersiveVisit />
         <About />
         <RivieraTimeline />
         <Services />
         <IdealCareQuiz />
-        <Availability />
-        <ImmersiveVisit />
         <ParentApp />
         <CafSimulator />
         <FaqSearch />

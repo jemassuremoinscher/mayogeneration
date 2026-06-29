@@ -11,6 +11,7 @@ const LanguageSwitcher = ({ variant = 'default' }: LanguageSwitcherProps) => {
   const languages: { code: Language; label: string; srLabel: string }[] = [
     { code: 'fr', label: 'FR', srLabel: 'Français' },
     { code: 'en', label: 'EN', srLabel: 'English' },
+    { code: 'it', label: 'IT', srLabel: 'Italiano' },
     { code: 'ru', label: 'RU', srLabel: 'Русский' },
   ];
 

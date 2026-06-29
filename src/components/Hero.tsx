@@ -99,14 +99,23 @@ const Hero = () => {
         <p className="text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto drop-shadow-md opacity-90">
           {t('hero.description')}
         </p>
-        <button
-          onClick={scrollToContact}
-          className="hidden md:inline-flex text-base sm:text-lg px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-body"
-          style={{ background: 'var(--gradient-primary)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
-          aria-label={t('hero.cta')}
-        >
-          {t('hero.cta')}
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <button
+            onClick={scrollToContact}
+            className="inline-flex text-base sm:text-lg px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-body"
+            style={{ background: 'var(--gradient-primary)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
+            aria-label={t('hero.cta')}
+          >
+            {t('hero.cta')}
+          </button>
+          <a
+            href="#visit"
+            className="inline-flex text-base sm:text-lg px-8 py-4 rounded-full font-semibold border-2 border-primary-foreground/80 text-primary-foreground bg-primary-foreground/5 hover:bg-primary-foreground/15 backdrop-blur-sm transition-all duration-300 hover:scale-105 font-body"
+            aria-label={t('hero.cta.visit')}
+          >
+            {t('hero.cta.visit')}
+          </a>
+        </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float" aria-hidden="true">

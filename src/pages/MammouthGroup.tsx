@@ -141,6 +141,7 @@ const companies: Company[] = [
 
 const MammouthGroup = () => {
   const { language } = useLanguage();
+  const lang = (language === 'it' ? 'fr' : language) as 'fr' | 'en' | 'ru';
   const reveal = useScrollReveal();
 
   const heading =
@@ -266,13 +267,13 @@ const MammouthGroup = () => {
                         </div>
                       </div>
                       <p className="text-sm font-medium mb-3" style={{ color: c.color }}>
-                        {c.tagline[language]}
+                        {c.tagline[lang]}
                       </p>
                       <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
-                        {c.description[language]}
+                        {c.description[lang]}
                       </p>
                       <p className="text-xs uppercase tracking-wide text-muted-foreground/80 mb-3">
-                        {geoLabel} · <span className="text-foreground/80 normal-case tracking-normal">{c.geo[language]}</span>
+                        {geoLabel} · <span className="text-foreground/80 normal-case tracking-normal">{c.geo[lang]}</span>
                       </p>
                       <a
                         href={c.url}
@@ -281,7 +282,7 @@ const MammouthGroup = () => {
                         className="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline transition-colors"
                         style={{ color: c.color }}
                       >
-                        {c.cta[language]} <ExternalLink className="w-3.5 h-3.5" />
+                        {c.cta[lang]} <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     </CardContent>
                   </Card>

@@ -38,7 +38,7 @@ const TrustBadges = () => {
               <Icon className="w-4 h-4 text-sage" />
             </div>
             <span className="text-xs font-medium text-foreground whitespace-nowrap font-body">
-              {badge[language]}
+              {((badge as any)[language] ?? (badge as any).en ?? (badge as any).fr)}
             </span>
           </div>
         );

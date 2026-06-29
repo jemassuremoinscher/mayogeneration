@@ -67,7 +67,7 @@ const tr = {
 
 const ParentApp = () => {
   const { language } = useLanguage();
-  const t = tr[language];
+  const t = ((tr as any)[language] ?? (tr as any).en ?? (tr as any).fr);
 
   return (
     <section className="py-20 bg-secondary/30" aria-labelledby="parent-app-heading">

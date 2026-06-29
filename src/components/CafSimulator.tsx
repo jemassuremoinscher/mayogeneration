@@ -77,7 +77,7 @@ const translations = {
 
 const CafSimulator = () => {
   const { language } = useLanguage();
-  const tr = translations[language];
+  const tr = ((translations as any)[language] ?? (translations as any).en ?? (translations as any).fr);
   const reveal = useScrollReveal();
 
   const [postalCode, setPostalCode] = useState('');

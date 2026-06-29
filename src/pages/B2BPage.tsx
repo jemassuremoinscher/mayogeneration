@@ -208,7 +208,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 const B2BPage = () => {
   const { language } = useLanguage();
-  const c = content[language];
+  const c = ((content as any)[language] ?? (content as any).en ?? (content as any).fr);
   const revealIntro = useScrollReveal();
   const revealBenefits = useScrollReveal();
   const revealStats = useScrollReveal();

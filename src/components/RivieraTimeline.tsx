@@ -60,7 +60,7 @@ const trLabels = {
 const RivieraTimeline = () => {
   const { language } = useLanguage();
   const reveal = useScrollReveal();
-  const t = trLabels[language];
+  const t = ((trLabels as any)[language] ?? (trLabels as any).en ?? (trLabels as any).fr);
 
   return (
     <section id="timeline" className="py-16 sm:py-24 px-4" aria-labelledby="timeline-title">
@@ -84,7 +84,7 @@ const RivieraTimeline = () => {
           <div className="flex gap-6 min-w-max">
             {steps.map((step, i) => {
               const Icon = step.icon;
-              const content = step[language];
+              const content = ((step as any)[language] ?? (step as any).en ?? (step as any).fr);
               return (
                 <div key={i} className="relative flex flex-col items-center w-56 shrink-0">
                   {/* Node */}
