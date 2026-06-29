@@ -8,6 +8,7 @@ import SEOHead from '@/components/SEOHead';
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const { language } = useLanguage();
+  const lang = (language === 'it' ? 'fr' : language) as 'fr' | 'en' | 'ru';
   const article = slug ? getArticle(slug) : undefined;
 
   if (!article) return <Navigate to="/blog" replace />;
@@ -22,8 +23,8 @@ const BlogArticle = () => {
   return (
     <>
       <SEOHead
-        title={`${article.title[language]} | Mayo`}
-        description={article.excerpt[language]}
+        title={`${article.title[lang]} | Mayo`}
+        description={article.excerpt[lang]}
         canonical={`https://mayocreche.fr/blog/${article.slug}`}
       />
       <Header />
@@ -36,7 +37,7 @@ const BlogArticle = () => {
             {new Date(article.date).toLocaleDateString(language)}
           </time>
           <h1 className="text-3xl md:text-5xl font-bold mt-2 mb-8 text-foreground">
-            {article.title[language]}
+            {article.title[lang]}
           </h1>
           <div
             className="prose prose-lg max-w-none text-foreground
@@ -44,7 +45,7 @@ const BlogArticle = () => {
               [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-foreground/90
               [&_a]:text-primary [&_a]:underline [&_a]:font-medium hover:[&_a]:opacity-80
               [&_strong]:text-foreground [&_strong]:font-semibold"
-            dangerouslySetInnerHTML={{ __html: article.content[language] }}
+            dangerouslySetInnerHTML={{ __html: article.content[lang] }}
           />
 
           <section className="mt-16 pt-8 border-t border-border">
@@ -56,8 +57,8 @@ const BlogArticle = () => {
                   to={`/blog/${a.slug}`}
                   className="block rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
                 >
-                  <p className="font-semibold text-foreground">{a.title[language]}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{a.excerpt[language]}</p>
+                  <p className="font-semibold text-foreground">{a.title[lang]}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{a.excerpt[lang]}</p>
                 </Link>
               ))}
             </div>

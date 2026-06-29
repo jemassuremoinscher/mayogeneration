@@ -11,6 +11,7 @@ import blogHero from '@/assets/hero-nursery.jpg';
 
 const Blog = () => {
   const { language } = useLanguage();
+  const lang = (language === 'it' ? 'fr' : language) as 'fr' | 'en' | 'ru';
   const revealArticles = useScrollReveal();
 
   const heading =
@@ -90,10 +91,10 @@ const Blog = () => {
                       {new Date(a.date).toLocaleDateString(language)}
                     </time>
                     <h2 className="text-xl font-semibold text-foreground mb-2">
-                      {a.title[language]}
+                      {a.title[lang]}
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-4 flex-1">
-                      {a.excerpt[language]}
+                      {a.excerpt[lang]}
                     </p>
                     <Link
                       to={`/blog/${a.slug}`}
