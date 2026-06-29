@@ -63,7 +63,7 @@ const LocationPage = () => {
       opens: '08:00',
       closes: '18:00',
     },
-    knowsLanguage: ['fr', 'en', 'ru'],
+    knowsLanguage: ['fr', 'en', 'ru', 'it'],
     priceRange: '€€',
   };
 
