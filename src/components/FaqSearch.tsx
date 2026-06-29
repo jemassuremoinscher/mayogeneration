@@ -112,7 +112,7 @@ function findAnswer(query: string, language: 'fr' | 'en' | 'ru' | 'it'): string 
   const q = query.toLowerCase();
   for (const entry of faqData) {
     if (entry.keywords.some((kw) => q.includes(kw))) {
-      return entry.((answer as any)[language] ?? (answer as any).en ?? (answer as any).fr);
+      return (entry.answer as any)[language] ?? (entry.answer as any).en ?? (entry.answer as any).fr;
     }
   }
   return ((defaultAnswer as any)[language] ?? (defaultAnswer as any).en ?? (defaultAnswer as any).fr);

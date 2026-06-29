@@ -23,15 +23,19 @@ const baseUrl = 'https://mayo-nice.fr';
 const meta = {
   fr: {
     title: 'Mayo – Crèche Multilingue Nice | Nursery Privée Côte d\'Azur',
-    description: 'Mayo, micro-crèche et nursery privée multilingue à Nice. Accueil personnalisé en français, anglais et russe pour les enfants de 3 mois à 3 ans sur la Côte d\'Azur.',
+    description: 'Mayo, micro-crèche et nursery privée multilingue à Nice. Accueil personnalisé en français, anglais, russe et italien pour les enfants de 3 mois à 3 ans sur la Côte d\'Azur.',
   },
   en: {
     title: 'Mayo – Multilingual Nursery Nice | Private Childcare French Riviera',
-    description: 'Mayo, multilingual private nursery in Nice. Personalized childcare in French, English and Russian for children aged 3 months to 3 years on the French Riviera.',
+    description: 'Mayo, multilingual private nursery in Nice. Personalized childcare in French, English, Russian and Italian for children aged 3 months to 3 years on the French Riviera.',
   },
   ru: {
     title: 'Mayo – Многоязычный детский сад Ницца | Частный детский сад Лазурный Берег',
-    description: 'Mayo – многоязычный частный детский сад в Ницце. Индивидуальный уход на французском, английском и русском для детей от 3 месяцев до 3 лет.',
+    description: 'Mayo – многоязычный частный детский сад в Ницце. Индивидуальный уход на французском, английском, русском и итальянском для детей от 3 месяцев до 3 лет.',
+  },
+  it: {
+    title: 'Mayo – Asilo Nido Multilingue Nizza | Costa Azzurra',
+    description: 'Mayo, micro-nido privato multilingue a Nizza. Accoglienza personalizzata in francese, inglese, russo e italiano per bambini da 3 mesi a 3 anni in Costa Azzurra.',
   },
 };
 
@@ -62,13 +66,19 @@ const jsonLd = {
     opens: '08:00',
     closes: '18:00',
   },
-  knowsLanguage: ['fr', 'en', 'ru'],
+  knowsLanguage: ['fr', 'en', 'ru', 'it'],
   areaServed: [
     { '@type': 'City', name: 'Nice' },
     { '@type': 'City', name: 'Cannes' },
     { '@type': 'City', name: 'Antibes' },
     { '@type': 'City', name: 'Monaco' },
     { '@type': 'City', name: 'Sophia Antipolis' },
+    { '@type': 'City', name: "Cap-d'Ail" },
+    { '@type': 'City', name: 'Saint-Jean-Cap-Ferrat' },
+    { '@type': 'City', name: 'Beausoleil' },
+    { '@type': 'City', name: 'Villefranche-sur-Mer' },
+    { '@type': 'City', name: 'Menton' },
+    { '@type': 'City', name: 'Mougins' },
   ],
   priceRange: '€€',
   aggregateRating: {

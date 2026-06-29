@@ -2,18 +2,9 @@ import { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Calculator, Euro, Mail, ArrowRight, Info } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { computeCmg } from '@/lib/cmg';
 
 const ELIGIBLE_DEPARTMENTS = ['06', '13', '83', '84', '04', '05', '98'];
-
-// CMG brackets 2024-2025 (enfant < 3 ans, micro-crèche)
-// Plafonds revenus annuels nets pour un couple avec 1 enfant
-const CMG_BRACKETS = [
-  { maxIncome: 22_000, hourlyAid: 4.41 },   // Tranche 1
-  { maxIncome: 49_000, hourlyAid: 2.78 },   // Tranche 2
-  { maxIncome: Infinity, hourlyAid: 1.67 },  // Tranche 3
-];
-
-const MAYO_HOURLY_RATE = 8.5; // Tarif horaire moyen micro-crèche
 
 const translations = {
   fr: {
@@ -93,18 +84,12 @@ const CafSimulator = () => {
 
   const result = useMemo(() => {
     if (!allFilled) return null;
-
-    const bracket = CMG_BRACKETS.find(b => incomeNum <= b.maxIncome) || CMG_BRACKETS[CMG_BRACKETS.length - 1];
-    const hourlyAid = bracket.hourlyAid;
-    const remainingPerHour = Math.max(0, MAYO_HOURLY_RATE - hourlyAid);
-    const monthlyRemaining = remainingPerHour * hoursNum;
-    const monthlyAid = hourlyAid * hoursNum;
-
+    const r = computeCmg({ annualIncome: incomeNum, nbChildren: 1, hours: hoursNum });
     return {
-      remainingPerHour: remainingPerHour.toFixed(2),
-      monthlyRemaining: monthlyRemaining.toFixed(0),
-      monthlyAid: monthlyAid.toFixed(0),
-      hourlyAid: hourlyAid.toFixed(2),
+      remainingPerHour: r.remainingPerHour.toFixed(2),
+      monthlyRemaining: r.monthlyRemaining.toFixed(0),
+      monthlyAid: r.monthlyAid.toFixed(0),
+      hourlyAid: r.hourlyAid.toFixed(2),
     };
   }, [allFilled, incomeNum, hoursNum]);
 

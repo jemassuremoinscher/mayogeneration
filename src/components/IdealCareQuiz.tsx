@@ -252,9 +252,10 @@ const IdealCareQuiz = () => {
           income_bracket: incomeBracket,
           nb_children: nbChildren,
           monaco_worker: monacoWorker,
-          first_name: firstName,
+          estimated_net_cost: cmg ? `${cmg.monthlyCostMin}-${cmg.monthlyCostMax}€/mois` : '',
+          parent_name: firstName,
           email,
-          language,
+          locale: language,
         }),
       }).catch(() => {});
     } catch {}
