@@ -1,4 +1,4 @@
-export type Lang = 'fr' | 'en' | 'ru';
+export type Lang = 'fr' | 'en' | 'ru' | 'it';
 
 export interface Article {
   slug: string;

@@ -108,7 +108,7 @@ const trLabels = {
   },
 };
 
-function findAnswer(query: string, language: 'fr' | 'en' | 'ru'): string {
+function findAnswer(query: string, language: 'fr' | 'en' | 'ru' | 'it'): string {
   const q = query.toLowerCase();
   for (const entry of faqData) {
     if (entry.keywords.some((kw) => q.includes(kw))) {
