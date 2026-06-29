@@ -165,10 +165,10 @@ const DailyTimeline = () => {
             {steps.map((step, i) => (
               <div key={i} className="text-center px-1">
                 <h3 className="text-sm font-semibold text-foreground mb-1 leading-tight">
-                  {step.((titles as any)[language] ?? (titles as any).en ?? (titles as any).fr)}
+                  {(step.titles as any)[language] ?? (step.titles as any).en ?? (step.titles as any).fr}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  {step.((descriptions as any)[language] ?? (descriptions as any).en ?? (descriptions as any).fr)}
+                  {(step.descriptions as any)[language] ?? (step.descriptions as any).en ?? (step.descriptions as any).fr}
                 </p>
               </div>
             ))}
@@ -191,10 +191,10 @@ const DailyTimeline = () => {
                 <div>
                   <span className="text-xs font-bold text-primary tracking-wide">{step.time}</span>
                   <h3 className="text-base font-semibold text-foreground leading-tight mt-0.5">
-                    {step.((titles as any)[language] ?? (titles as any).en ?? (titles as any).fr)}
+                    {(step.titles as any)[language] ?? (step.titles as any).en ?? (step.titles as any).fr}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mt-1">
-                    {step.((descriptions as any)[language] ?? (descriptions as any).en ?? (descriptions as any).fr)}
+                    {(step.descriptions as any)[language] ?? (step.descriptions as any).en ?? (step.descriptions as any).fr}
                   </p>
                 </div>
               </li>
