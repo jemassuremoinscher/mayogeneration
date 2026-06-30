@@ -63,10 +63,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       valueInputOption: 'RAW',
       requestBody: { values },
     });
-    return res.status(200).json({ ok: true, id });
+    return res.status(200).json({ ok: true, id, persisted: true });
   } catch (err) {
     console.error('waitlist_error', err);
-    // On ne casse pas le front : succès « best-effort »
-    return res.status(200).json({ ok: true, id, persisted: false });
+    return res.status(502).json({ ok: false, error: 'persist_failed', id });
   }
 }
