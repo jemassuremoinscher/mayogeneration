@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkAdmin, cors, ensureHeader, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets';
+import { checkAdmin, cors, ensureHeader, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   Object.entries(cors).forEach(([k, v]) => res.setHeader(k, v));

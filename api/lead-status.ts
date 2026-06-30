@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { checkAdmin, cors, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets';
+import { checkAdmin, cors, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets.js';
 
 const ALLOWED = ['nouveau', 'contacté', 'visite', 'inscrit', 'perdu'] as const;
 const Body = z.object({ id: z.string().min(1), status: z.enum(ALLOWED) });
