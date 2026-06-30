@@ -132,10 +132,11 @@ const QuizContact = () => {
               ))}
             </select>
           </div>
-          <button type="submit" disabled={!valid}
+          {error && <p className="text-xs text-destructive">{t.error}</p>}
+          <button type="submit" disabled={!valid || sending}
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: valid ? 'var(--gradient-primary)' : undefined, color: valid ? 'white' : undefined, boxShadow: valid ? 'var(--shadow-sage)' : undefined }}>
-            {t.submit} <ArrowRight className="w-4 h-4" />
+            {sending ? '…' : t.submit} <ArrowRight className="w-4 h-4" />
           </button>
         </form>
       </div>
