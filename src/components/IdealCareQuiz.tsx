@@ -345,21 +345,32 @@ const IdealCareQuiz = () => {
               </div>
 
               {!confirmed ? (
-                <div className="flex flex-col sm:flex-row gap-2 mt-6">
-                  <button
-                    onClick={handleConfirm}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all hover:scale-[1.02]"
-                    style={{ background: 'var(--gradient-primary)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
-                  >
-                    {t.confirmCta}
-                  </button>
-                  <a
-                    href="#visit"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold border-2 border-primary text-primary hover:bg-primary/5 transition-all"
-                  >
-                    {t.visitCta}
-                  </a>
-                </div>
+                <>
+                  <div className="flex flex-col sm:flex-row gap-2 mt-6">
+                    <button
+                      onClick={handleConfirm}
+                      disabled={confirming}
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
+                      style={{ background: 'var(--gradient-primary)', color: 'white', boxShadow: 'var(--shadow-sage)' }}
+                    >
+                      {confirming ? '…' : t.confirmCta}
+                    </button>
+                    <a
+                      href="#visit"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold border-2 border-primary text-primary hover:bg-primary/5 transition-all"
+                    >
+                      {t.visitCta}
+                    </a>
+                  </div>
+                  {confirmError && (
+                    <p className="mt-3 text-sm text-destructive text-center">
+                      {language === 'fr' ? 'Une erreur est survenue, merci de réessayer.'
+                        : language === 'en' ? 'Something went wrong, please try again.'
+                        : language === 'ru' ? 'Произошла ошибка, попробуйте ещё раз.'
+                        : 'Si è verificato un errore, riprova.'}
+                    </p>
+                  )}
+                </>
               ) : (
                 <p className="mt-6 text-center font-medium text-primary">{t.confirmed}</p>
               )}
