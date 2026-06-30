@@ -201,6 +201,8 @@ const IdealCareQuiz = () => {
   const [email, setEmail] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [confirmError, setConfirmError] = useState(false);
 
   // Pre-select site if user came from a location card
   useEffect(() => {
@@ -235,11 +237,12 @@ const IdealCareQuiz = () => {
     setStep((s) => (s + 1) as Step);
   };
 
-  const handleConfirm = () => {
-    setConfirmed(true);
-    // Best-effort POST
+  const handleConfirm = async () => {
+    if (confirming) return;
+    setConfirming(true);
+    setConfirmError(false);
     try {
-      fetch('/api/waitlist', {
+      const r = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -257,8 +260,18 @@ const IdealCareQuiz = () => {
           email,
           locale: language,
         }),
-      }).catch(() => {});
-    } catch {}
+      });
+      const body = await r.json().catch(() => ({}));
+      if (r.ok && body?.ok === true && body?.persisted === true) {
+        setConfirmed(true);
+      } else {
+        setConfirmError(true);
+      }
+    } catch {
+      setConfirmError(true);
+    } finally {
+      setConfirming(false);
+    }
   };
 
   const recommended = locations.find((l) => l.slug === preferredSite);
