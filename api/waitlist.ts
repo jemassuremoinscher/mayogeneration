@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { cors, ensureHeader, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets';
+import { cors, ensureHeader, getSheetId, getSheets, HEADERS, SHEET_NAME } from './_sheets.js';
 
 const Body = z.object({
   source: z.string().default('contact'),
