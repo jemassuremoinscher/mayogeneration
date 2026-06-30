@@ -13,6 +13,7 @@ const tr = {
     sitePlaceholder: '— Choisir un secteur —',
     submit: 'Recevoir les disponibilités de mon secteur',
     success: 'Merci, c\'est noté. Nous revenons vers vous sous 48 h.',
+    error: 'Une erreur est survenue, merci de réessayer.',
   },
   en: {
     title: 'Get availability for your area',
@@ -22,6 +23,7 @@ const tr = {
     sitePlaceholder: '— Choose an area —',
     submit: 'Receive my area availability',
     success: 'Thanks, noted. We\'ll get back to you within 48h.',
+    error: 'Something went wrong, please try again.',
   },
   ru: {
     title: 'Получите наличие мест в вашем районе',
@@ -31,6 +33,7 @@ const tr = {
     sitePlaceholder: '— Выбрать район —',
     submit: 'Получить наличие мест',
     success: 'Спасибо! Мы свяжемся с вами в течение 48 часов.',
+    error: 'Произошла ошибка, попробуйте ещё раз.',
   },
   it: {
     title: 'Ricevi le disponibilità della tua zona',
@@ -40,6 +43,7 @@ const tr = {
     sitePlaceholder: '— Scegli una zona —',
     submit: 'Ricevi le disponibilità della mia zona',
     success: 'Grazie, abbiamo registrato la tua richiesta. Ti ricontatteremo entro 48 ore.',
+    error: 'Si è verificato un errore, riprova.',
   },
 };
 
@@ -51,6 +55,8 @@ const QuizContact = () => {
   const [email, setEmail] = useState('');
   const [site, setSite] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   // Pré-remplir depuis le clic « Liste d'attente prioritaire » d'une carte
   useEffect(() => {
@@ -62,17 +68,28 @@ const QuizContact = () => {
 
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!valid) return;
-    setSubmitted(true);
+    if (!valid || sending) return;
+    setSending(true);
+    setError(false);
     try {
-      fetch('/api/waitlist', {
+      const r = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'rappel', email, preferred_site: site || null, language }),
-      }).catch(() => {});
-    } catch {}
+        body: JSON.stringify({ source: 'rappel', email, preferred_site: site || null, locale: language }),
+      });
+      const body = await r.json().catch(() => ({}));
+      if (r.ok && body?.ok === true && body?.persisted === true) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   if (submitted) {

@@ -34,7 +34,12 @@ const Contact = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ source: 'contact', parent_name: name, email, message, locale: language }),
       });
-      setState(r.ok ? 'sent' : 'error');
+      const body = await r.json().catch(() => ({}));
+      if (r.ok && body?.ok === true && body?.persisted === true) {
+        setState('sent');
+      } else {
+        setState('error');
+      }
     } catch {
       setState('error');
     }
