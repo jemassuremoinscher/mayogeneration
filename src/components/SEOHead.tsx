@@ -5,6 +5,7 @@ interface SEOHeadProps {
   description: string;
   canonical?: string;
   jsonLd?: object;
+  noindex?: boolean;
 }
 
 const HREFLANGS: { code: string; lang: string }[] = [
@@ -14,7 +15,7 @@ const HREFLANGS: { code: string; lang: string }[] = [
   { code: 'it', lang: 'it' },
 ];
 
-const SEOHead = ({ title, description, canonical, jsonLd }: SEOHeadProps) => {
+const SEOHead = ({ title, description, canonical, jsonLd, noindex }: SEOHeadProps) => {
   useEffect(() => {
     document.title = title;
 
@@ -33,6 +34,18 @@ const SEOHead = ({ title, description, canonical, jsonLd }: SEOHeadProps) => {
     setMeta('property', 'og:description', description);
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
+
+    // robots (noindex pour pages placeholder/légales)
+    {
+      const existingRobots = document.querySelector('meta[name="robots"][data-dyn]') as HTMLMetaElement | null;
+      if (noindex) {
+        let r = existingRobots;
+        if (!r) { r = document.createElement('meta'); r.setAttribute('name', 'robots'); r.setAttribute('data-dyn', '1'); document.head.appendChild(r); }
+        r.setAttribute('content', 'noindex, follow');
+      } else if (existingRobots) {
+        existingRobots.remove();
+      }
+    }
 
     // Locale alternates (FR + EN + RU + IT)
     document.querySelectorAll('meta[property="og:locale:alternate"][data-dyn]').forEach((n) => n.remove());
@@ -86,7 +99,7 @@ const SEOHead = ({ title, description, canonical, jsonLd }: SEOHeadProps) => {
       const s = document.getElementById('dynamic-jsonld');
       if (s) s.remove();
     };
-  }, [title, description, canonical, jsonLd]);
+  }, [title, description, canonical, jsonLd, noindex]);
 
   return null;
 };

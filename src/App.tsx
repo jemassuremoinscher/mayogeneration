@@ -11,6 +11,11 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import MammouthGroup from "./pages/MammouthGroup";
 import Admin from "./pages/Admin";
+import SimulateurCout from "./pages/SimulateurCout";
+import Diagnostic from "./pages/Diagnostic";
+import MentionsLegales from "./pages/MentionsLegales";
+import Confidentialite from "./pages/Confidentialite";
+import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +34,11 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/mammouth-group" element={<MammouthGroup />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/simulateur-cout-creche" element={<SimulateurCout />} />
+            <Route path="/diagnostic" element={<Diagnostic />} />
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
+            <Route path="/confidentialite" element={<Confidentialite />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route path="/:slug" element={<LocationPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

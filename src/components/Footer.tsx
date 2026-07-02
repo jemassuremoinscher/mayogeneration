@@ -7,18 +7,33 @@ import CrossSiteLinks from '@/components/CrossSiteLinks';
 const Footer = () => {
   const { t, language } = useLanguage();
   const year = new Date().getFullYear();
+  const L = (o: Record<string, string>) => o[language] ?? o.fr;
 
-  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+  const soonLabel = L({ fr: 'bientôt', en: 'soon', ru: 'скоро', it: 'presto' });
 
-
-  const footerLinks = locations.map((loc) => {
-    const labels: Record<string, string> = {
+  const crecheLinks = locations.map((loc) => ({
+    label: L({
       fr: `Nursery privée & Micro-crèche ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
       en: `Private nursery ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
       ru: `Частный детский сад ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
-    };
-    return { label: ((labels as any)[language] ?? (labels as any).en ?? (labels as any).fr), slug: loc.slug, comingSoon: loc.comingSoon };
-  });
+      it: `Nursery privata & Micro-asilo ${loc.city}${loc.neighborhood ? ` ${loc.neighborhood}` : ''}`,
+    }),
+    slug: loc.slug,
+    comingSoon: loc.comingSoon,
+  }));
+
+  const tools = [
+    { to: '/simulateur-cout-creche', label: L({ fr: 'Simulateur de coût', en: 'Cost simulator', ru: 'Калькулятор стоимости', it: 'Simulatore di costo' }) },
+    { to: '/diagnostic', label: L({ fr: 'Diagnostic personnalisé', en: 'Personalised diagnostic', ru: 'Персональная диагностика', it: 'Diagnosi personalizzata' }) },
+    { to: '/blog', label: L({ fr: 'Blog', en: 'Blog', ru: 'Блог', it: 'Blog' }) },
+    { to: '/entreprises', label: L({ fr: 'Solutions Entreprises (B2B)', en: 'Corporate solutions (B2B)', ru: 'Корпоративные решения (B2B)', it: 'Soluzioni aziendali (B2B)' }) },
+  ];
+
+  const legal = [
+    { to: '/mentions-legales', label: L({ fr: 'Mentions légales', en: 'Legal notice', ru: 'Правовая информация', it: 'Note legali' }) },
+    { to: '/confidentialite', label: L({ fr: 'Confidentialité', en: 'Privacy', ru: 'Конфиденциальность', it: 'Privacy' }) },
+    { to: '/cookies', label: L({ fr: 'Cookies', en: 'Cookies', ru: 'Cookies', it: 'Cookie' }) },
+  ];
 
   return (
     <footer className="bg-primary text-primary-foreground py-12 px-4" role="contentinfo">
@@ -28,31 +43,29 @@ const Footer = () => {
           <div>
             <img src={logoMayo} alt="Mayo" className="h-8 w-auto !rounded-none brightness-0 invert mb-2" />
             <p className="text-sm opacity-80">
-              {language === 'fr'
-                ? 'Crèche multilingue & nursery privée sur la Côte d\'Azur'
-                : language === 'en'
-                ? 'Multilingual nursery & private childcare on the French Riviera'
-                : 'Многоязычный детский сад на Лазурном Берегу'}
+              {L({
+                fr: 'Crèche multilingue & nursery privée sur la Côte d\'Azur',
+                en: 'Multilingual nursery & private childcare on the French Riviera',
+                ru: 'Многоязычный детский сад на Лазурном Берегу',
+                it: 'Asilo multilingue & nursery privata sulla Costa Azzurra',
+              })}
             </p>
           </div>
 
           {/* Nos Crèches */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
-              {language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли'}
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide">
+              {L({ fr: 'Nos Crèches', en: 'Our Nurseries', ru: 'Наши Ясли', it: 'I nostri asili' })}
             </p>
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
+              {crecheLinks.map((link) => (
                 <li key={link.slug}>
                   {link.comingSoon ? (
                     <span className="text-sm opacity-50">
                       {link.label} <span className="text-xs">({soonLabel})</span>
                     </span>
                   ) : (
-                    <Link
-                      to={`/${link.slug}`}
-                      className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
-                    >
+                    <Link to={`/${link.slug}`} className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">
                       {link.label}
                     </Link>
                   )}
@@ -61,55 +74,46 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* SEO Semantic Links */}
+          {/* Outils & ressources */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
-              {language === 'fr' ? 'Services Côte d\'Azur' : language === 'en' ? 'French Riviera Services' : 'Услуги Лазурного Берега'}
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide">
+              {L({ fr: 'Outils & ressources', en: 'Tools & resources', ru: 'Инструменты и ресурсы', it: 'Strumenti e risorse' })}
             </p>
             <ul className="space-y-2">
-              {[
-                { fr: 'Micro-crèche 06 Alpes-Maritimes', en: 'Micro-nursery 06 Alpes-Maritimes', ru: 'Мини-ясли 06 Приморские Альпы' },
-                { fr: 'Nanny Riviera – Garde d\'enfants', en: 'Nanny Riviera – Childcare', ru: 'Няня Ривьера – Уход за детьми' },
-                { fr: 'Crèche bilingue Côte d\'Azur', en: 'Bilingual nursery French Riviera', ru: 'Двуязычный детский сад Лазурный Берег' },
-                { fr: 'Garde d\'enfants multilingue 06', en: 'Multilingual childcare 06', ru: 'Многоязычный уход за детьми 06' },
-                { fr: 'Baby-sitting premium Nice', en: 'Premium babysitting Nice', ru: 'Премиум няня Ницца' },
-              ].map((item, i) => (
-                <li key={i}>
-                  <Link
-                    to="/"
-                    className="text-sm opacity-70 hover:opacity-100 hover:underline transition-opacity"
-                  >
-                    {((item as any)[language] ?? (item as any).en ?? (item as any).fr)}
+              {tools.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact + B2B */}
+          {/* Contact + Légal */}
           <div>
-            <p className="font-semibold mb-3 text-sm uppercase tracking-wide text-primary-foreground">
-              {t('contact.title')}
-            </p>
+            <p className="font-semibold mb-3 text-sm uppercase tracking-wide">{t('contact.title')}</p>
             <p className="text-sm opacity-80">{t('contact.address')}</p>
             <p className="text-sm opacity-80 mb-4">{t('contact.hours')}</p>
-            <Link
-              to="/entreprises"
-              className="inline-block text-sm font-medium opacity-80 hover:opacity-100 hover:underline transition-opacity"
-            >
-              {language === 'fr' ? '→ Solutions Entreprises (B2B)'
-                : language === 'en' ? '→ Corporate Solutions (B2B)'
-                : '→ Корпоративные решения (B2B)'}
-            </Link>
+            <p className="font-semibold mb-2 text-sm uppercase tracking-wide">
+              {L({ fr: 'Légal', en: 'Legal', ru: 'Правовое', it: 'Legale' })}
+            </p>
+            <ul className="space-y-2">
+              {legal.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="text-sm opacity-70 hover:opacity-100 hover:underline transition-opacity">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         <CrossSiteLinks />
 
         <div className="border-t border-primary-foreground/20 pt-6 text-center mt-6">
-          <p className="text-xs opacity-60">
-            &copy; {year} Mayo. {t('footer.rights')}
-          </p>
+          <p className="text-xs opacity-60">&copy; {year} Mayo. {t('footer.rights')}</p>
         </div>
       </div>
     </footer>
