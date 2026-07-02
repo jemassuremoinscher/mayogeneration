@@ -72,7 +72,7 @@ const Header = () => {
           <img
             src={logoMayo}
             alt="Mayo"
-            className={`h-8 sm:h-9 w-auto !rounded-none translate-y-[3px] transition-all ${scrolled ? 'brightness-100' : 'brightness-0 invert'}`}
+            className={`h-8 sm:h-9 w-auto !rounded-none translate-y-[8px] transition-all ${scrolled ? 'brightness-100' : 'brightness-0 invert'}`}
           />
         </Link>
 
