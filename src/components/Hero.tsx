@@ -76,7 +76,7 @@ const Hero = () => {
         className="relative z-10 text-center text-primary-foreground px-4 pt-16 max-w-4xl mx-auto animate-fade-in will-change-transform"
         style={{ transform: contentTransform, opacity: contentOpacity }}
       >
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 drop-shadow-lg flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 drop-shadow-lg flex items-baseline justify-center flex-wrap gap-x-3 sm:gap-x-4">
           {(() => {
             const parts = t('hero.title').split('Mayo');
             return parts.map((part, i) => (
@@ -86,7 +86,7 @@ const Hero = () => {
                   <img
                     src={logoMayo}
                     alt="Mayo"
-                    className="inline-block !rounded-none brightness-0 invert h-[1.35em] w-auto align-middle -translate-y-[0.05em]"
+                    className="inline-block !rounded-none brightness-0 invert h-[1.35em] w-auto"
                   />
                 )}
               </span>
