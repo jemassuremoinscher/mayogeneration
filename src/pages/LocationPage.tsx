@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEOHead from '@/components/SEOHead';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
+import CafSimulator from '@/components/CafSimulator';
 import { MapPin, Navigation, ArrowLeft, Star, AlertCircle, Languages } from 'lucide-react';
 
 const baseUrl = 'https://mayo-nice.fr';
@@ -38,8 +39,57 @@ const LocationPage = () => {
     try { sessionStorage.setItem('mayo:preferred_site', location.slug); } catch {}
   };
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
+  const L = (o: Record<string, string>) => o[language] ?? o.fr;
+  const C = location.city;
+  const H = highlightLabel;
+
+  // FAQ data-driven (tokens {C} = ville, {H} = langue mise en avant)
+  const faqs = [
+    {
+      q: L({
+        fr: `Quelles langues parle-t-on à la crèche Mayo de ${C} ?`,
+        en: `What languages are spoken at the Mayo nursery in ${C}?`,
+        ru: `На каких языках говорят в яслях Mayo в ${C}?`,
+        it: `Quali lingue si parlano all'asilo Mayo di ${C}?`,
+      }),
+      a: L({
+        fr: `Français, anglais et ${H}.`,
+        en: `French, English and ${H}.`,
+        ru: `На французском, английском и ${H}.`,
+        it: `Francese, inglese e ${H}.`,
+      }),
+    },
+    {
+      q: L({
+        fr: `À partir de quel âge accueillez-vous les enfants à ${C} ?`,
+        en: `From what age do you welcome children in ${C}?`,
+        ru: `С какого возраста вы принимаете детей в ${C}?`,
+        it: `Da che età accogliete i bambini a ${C}?`,
+      }),
+      a: L({
+        fr: `Dès les premiers mois, en micro-crèche à effectif réduit.`,
+        en: `From the first months, in a small-group micro-nursery.`,
+        ru: `С первых месяцев, в мини-яслях с небольшими группами.`,
+        it: `Fin dai primi mesi, in un micro-asilo a piccoli gruppi.`,
+      }),
+    },
+    {
+      q: L({
+        fr: `Comment s'inscrire à la crèche de ${C} ?`,
+        en: `How do I enrol at the ${C} nursery?`,
+        ru: `Как записаться в ясли в ${C}?`,
+        it: `Come iscriversi all'asilo di ${C}?`,
+      }),
+      a: L({
+        fr: `En rejoignant la liste d'attente Mayo de ${C} ci-dessus.`,
+        en: `By joining the Mayo ${C} waitlist above.`,
+        ru: `Присоединившись к листу ожидания Mayo ${C} выше.`,
+        it: `Iscrivendosi alla lista d'attesa Mayo ${C} qui sopra.`,
+      }),
+    },
+  ];
+
+  const localBusinessLd = {
     '@type': ['LocalBusiness', 'ChildCare'],
     name: `Mayo ${location.city}`,
     description: tr.metaDescription,
@@ -65,6 +115,20 @@ const LocationPage = () => {
     },
     knowsLanguage: ['fr', 'en', 'ru', 'it'],
     priceRange: '€€',
+  };
+
+  const faqLd = {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [localBusinessLd, faqLd],
   };
 
   return (
@@ -102,7 +166,7 @@ const LocationPage = () => {
             className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            {language === 'fr' ? 'Retour à l\'accueil' : language === 'en' ? 'Back to home' : 'На главную'}
+            {L({ fr: 'Retour à l\'accueil', en: 'Back to home', ru: 'На главную', it: 'Torna alla home' })}
           </Link>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
             {tr.h1}
@@ -126,18 +190,33 @@ const LocationPage = () => {
         {/* Intro */}
         <section className="max-w-5xl mx-auto px-4 pb-12" aria-labelledby="intro-heading">
           <h2 id="intro-heading" className="sr-only">
-            {language === 'fr' ? 'Présentation' : language === 'en' ? 'Overview' : 'Описание'}
+            {L({ fr: 'Présentation', en: 'Overview', ru: 'Описание', it: 'Presentazione' })}
           </h2>
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
             <p>{tr.intro}</p>
           </div>
         </section>
 
+        {/* Pourquoi {langue} à {ville} */}
+        <section className="max-w-5xl mx-auto px-4 pb-12" aria-labelledby="why-heading">
+          <h2 id="why-heading" className="text-2xl font-semibold text-foreground mb-4">
+            {L({ fr: `Pourquoi ${H} à ${C} ?`, en: `Why ${H} in ${C}?`, ru: `Почему ${H} в ${C}?`, it: `Perché ${H} a ${C}?` })}
+          </h2>
+          <p className="text-muted-foreground leading-relaxed max-w-3xl">
+            {L({
+              fr: `À ${C}, l'ouverture internationale fait partie du quotidien. Chez Mayo ${C}, vos enfants baignent dans le français et l'anglais, avec ${H} comme troisième langue mise en avant — une immersion naturelle, précieuse dès le plus jeune âge.`,
+              en: `In ${C}, an international outlook is part of daily life. At Mayo ${C}, your children are immersed in French and English, with ${H} as the highlighted third language — a natural head-start from the earliest age.`,
+              ru: `В ${C} международная среда — часть повседневной жизни. В Mayo ${C} дети погружаются во французский и английский, а ${H} становится третьим приоритетным языком — естественное преимущество с самых первых лет.`,
+              it: `A ${C}, l'apertura internazionale fa parte della vita quotidiana. Da Mayo ${C}, i bambini vivono immersi nel francese e nell'inglese, con ${H} come terza lingua valorizzata — un vantaggio naturale fin dai primi anni.`,
+            })}
+          </p>
+        </section>
+
         {/* Map */}
         <section className="max-w-5xl mx-auto px-4 pb-12" aria-labelledby="map-heading">
           <h2 id="map-heading" className="text-2xl font-semibold text-foreground mb-4 flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
-            {language === 'fr' ? 'Notre emplacement' : language === 'en' ? 'Our location' : 'Наше расположение'}
+            {L({ fr: 'Notre emplacement', en: 'Our location', ru: 'Наше расположение', it: 'La nostra sede' })}
           </h2>
           <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
             <iframe
@@ -158,7 +237,7 @@ const LocationPage = () => {
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              {language === 'fr' ? 'Voir sur Google Maps' : language === 'en' ? 'View on Google Maps' : 'Открыть в Google Картах'}
+              {L({ fr: 'Voir sur Google Maps', en: 'View on Google Maps', ru: 'Открыть в Google Картах', it: 'Vedi su Google Maps' })}
             </a>
           </p>
         </section>
@@ -167,7 +246,7 @@ const LocationPage = () => {
         <section className="max-w-5xl mx-auto px-4 pb-16" aria-labelledby="landmarks-heading">
           <h2 id="landmarks-heading" className="text-2xl font-semibold text-foreground mb-6 flex items-center gap-2">
             <Navigation className="w-5 h-5 text-primary" aria-hidden="true" />
-            {language === 'fr' ? 'Points de repère à proximité' : language === 'en' ? 'Nearby landmarks' : 'Ближайшие ориентиры'}
+            {L({ fr: 'Points de repère à proximité', en: 'Nearby landmarks', ru: 'Ближайшие ориентиры', it: 'Punti di riferimento vicini' })}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {tr.landmarks.map((lm, i) => (
@@ -185,15 +264,45 @@ const LocationPage = () => {
           </div>
         </section>
 
+        {/* Simulateur coût / CMG */}
+        <section className="max-w-5xl mx-auto px-4 pb-2" aria-labelledby="cmg-heading">
+          <h2 id="cmg-heading" className="text-2xl font-semibold text-foreground mb-2">
+            {L({ fr: 'Combien ça coûte ?', en: 'How much does it cost?', ru: 'Сколько это стоит?', it: 'Quanto costa?' })}
+          </h2>
+          <p className="text-muted-foreground">
+            {L({ fr: `Estimez votre reste à charge à ${C}.`, en: `Estimate your out-of-pocket cost in ${C}.`, ru: `Рассчитайте ваши расходы в ${C}.`, it: `Stima la tua spesa a ${C}.` })}
+          </p>
+        </section>
+        <CafSimulator />
+
+        {/* FAQ */}
+        <section className="max-w-5xl mx-auto px-4 py-12" aria-labelledby="faq-heading">
+          <h2 id="faq-heading" className="text-2xl font-semibold text-foreground mb-6">
+            {L({ fr: 'Questions fréquentes', en: 'Frequently asked questions', ru: 'Частые вопросы', it: 'Domande frequenti' })}
+          </h2>
+          <div className="space-y-3 max-w-3xl">
+            {faqs.map((f, i) => (
+              <details key={i} className="group rounded-xl border border-border bg-card p-4">
+                <summary className="cursor-pointer font-medium text-foreground list-none flex items-center justify-between gap-3">
+                  {f.q}
+                  <span className="text-primary transition-transform group-open:rotate-45 text-xl leading-none shrink-0">+</span>
+                </summary>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="bg-primary/5 py-12 px-4" aria-labelledby="cta-heading">
           <div className="max-w-3xl mx-auto text-center">
             <h2 id="cta-heading" className="text-2xl font-bold text-foreground mb-4">
-              {language === 'fr'
-                ? `Inscrivez votre enfant chez Mayo ${location.city}`
-                : language === 'en'
-                ? `Enroll your child at Mayo ${location.city}`
-                : `Запишите ребёнка в Mayo ${location.city}`}
+              {L({
+                fr: `Inscrivez votre enfant chez Mayo ${location.city}`,
+                en: `Enroll your child at Mayo ${location.city}`,
+                ru: `Запишите ребёнка в Mayo ${location.city}`,
+                it: `Iscrivi tuo figlio da Mayo ${location.city}`,
+              })}
             </h2>
             <a
               href="/#contact"
