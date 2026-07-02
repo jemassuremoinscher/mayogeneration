@@ -122,12 +122,12 @@ const Index = () => {
       <TrustBadges />
       <main className="min-h-screen">
         <Hero />
-        <Availability />
+        <IdealCareQuiz />
         <ImmersiveVisit />
         <About />
         <RivieraTimeline />
         <Services />
-        <IdealCareQuiz />
+        <Availability />
         <ParentApp />
         <CafSimulator />
         <FaqSearch />

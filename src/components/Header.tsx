@@ -30,7 +30,7 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const b2bLabel = language === 'fr' ? 'Entreprises' : language === 'en' ? 'Corporate' : 'Бизнесу';
+  const b2bLabel = language === 'fr' ? 'Entreprises' : language === 'en' ? 'Corporate' : language === 'it' ? 'Aziende' : 'Бизнесу';
 
   const navItems = [
     { key: 'nav.about', href: '/#about' },
@@ -38,7 +38,7 @@ const Header = () => {
     { key: 'nav.contact', href: '/#contact' },
   ];
 
-  const locLabel = language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : 'Наши Ясли';
+  const locLabel = language === 'fr' ? 'Nos Crèches' : language === 'en' ? 'Our Nurseries' : language === 'it' ? 'I nostri asili' : 'Наши Ясли';
 
   const scrollTo = (href: string) => {
     setMobileOpen(false);
@@ -72,7 +72,7 @@ const Header = () => {
           <img
             src={logoMayo}
             alt="Mayo"
-            className={`h-8 sm:h-9 w-auto !rounded-none transition-all ${scrolled ? 'brightness-100' : 'brightness-0 invert'}`}
+            className={`h-8 sm:h-9 w-auto !rounded-none translate-y-[3px] transition-all ${scrolled ? 'brightness-100' : 'brightness-0 invert'}`}
           />
         </Link>
 
@@ -125,7 +125,7 @@ const Header = () => {
               <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[220px] animate-fade-in">
                 {locations.map((loc) => {
                   const cityLabel = loc.city + (loc.neighborhood ? ` – ${loc.neighborhood}` : '');
-                  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+                  const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : language === 'it' ? 'presto' : 'скоро';
                   return loc.comingSoon ? (
                     <span
                       key={loc.slug}
@@ -215,7 +215,7 @@ const Header = () => {
           {mobileLocationsOpen && (
             <div className="pl-4 space-y-1">
               {locations.map((loc) => {
-                const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : 'скоро';
+                const soonLabel = language === 'fr' ? 'bientôt' : language === 'en' ? 'soon' : language === 'it' ? 'presto' : 'скоро';
                 const cityLabel = loc.city + (loc.neighborhood ? ` – ${loc.neighborhood}` : '');
                 return loc.comingSoon ? (
                   <span
