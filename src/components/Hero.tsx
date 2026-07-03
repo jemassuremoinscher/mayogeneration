@@ -86,8 +86,9 @@ const Hero = () => {
                   <img
                     src={logoMayo}
                     alt="Mayo"
-                    className="inline-block !rounded-none brightness-0 invert h-[1.35em] w-auto"
+                    className="inline-block !rounded-none brightness-0 invert h-[1.35em] w-auto translate-y-[0.28em]"
                   />
+
                 )}
               </span>
             ));
