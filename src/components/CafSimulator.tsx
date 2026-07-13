@@ -25,6 +25,11 @@ const translations = {
     notEligibleZone: 'Ce code postal n\'est pas dans notre zone de couverture (Alpes-Maritimes / PACA).',
     fillAll: 'Renseignez les 3 champs pour voir votre estimation.',
     monthly: 'soit',
+    leadIntro: 'Recevez ce devis détaillé + les disponibilités de votre secteur par email.',
+    emailPlaceholder: 'Votre email',
+    sendCta: 'Recevoir mon devis',
+    thanks: 'Merci ! On vous envoie tout ça par email.',
+    errorMsg: 'Une erreur est survenue, réessayez.',
   },
   en: {
     title: 'CAF / CMG Aid Simulator',
@@ -44,6 +49,11 @@ const translations = {
     notEligibleZone: 'This postal code is not in our coverage area (Alpes-Maritimes / PACA).',
     fillAll: 'Fill in all 3 fields to see your estimate.',
     monthly: 'i.e.',
+    leadIntro: 'Get this detailed quote + availability in your area by email.',
+    emailPlaceholder: 'Your email',
+    sendCta: 'Get my quote',
+    thanks: 'Thanks! We\'ll email you everything.',
+    errorMsg: 'Something went wrong, please try again.',
   },
   ru: {
     title: 'Калькулятор помощи CAF / CMG',
@@ -63,6 +73,11 @@ const translations = {
     notEligibleZone: 'Этот почтовый индекс не входит в нашу зону покрытия (Приморские Альпы / ПАКА).',
     fillAll: 'Заполните все 3 поля, чтобы увидеть оценку.',
     monthly: 'т.е.',
+    leadIntro: 'Получите этот расчёт + наличие мест в вашем районе на email.',
+    emailPlaceholder: 'Ваш email',
+    sendCta: 'Получить расчёт',
+    thanks: 'Спасибо! Мы отправим всё на email.',
+    errorMsg: 'Произошла ошибка, попробуйте ещё раз.',
   },
 };
 
@@ -74,6 +89,11 @@ const CafSimulator = () => {
   const [postalCode, setPostalCode] = useState('');
   const [income, setIncome] = useState('');
   const [hours, setHours] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
   const postalDept = postalCode.slice(0, 2);
   const isEligibleZone = postalCode.length >= 2 && ELIGIBLE_DEPARTMENTS.includes(postalDept);
@@ -108,6 +128,36 @@ const CafSimulator = () => {
     const num = parseInt(cleaned, 10);
     if (cleaned === '' || (num >= 0 && num <= 300)) {
       setHours(cleaned);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!validEmail || submitting) return;
+    setSubmitting(true);
+    setError(false);
+    try {
+      const r = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'simulateur',
+          email: email.trim(),
+          estimated_net_cost: result?.monthlyRemaining ?? '',
+          income_bracket: income,
+          message: `Simulateur — CP ${postalCode}, ${hours}h/mois, reste estimé ~${result?.monthlyRemaining}€/mois`,
+          locale: language,
+        }),
+      });
+      const body = await r.json().catch(() => ({}));
+      if (r.ok && body?.ok === true && body?.persisted === true) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -228,15 +278,40 @@ const CafSimulator = () => {
             )}
           </div>
 
-          {/* CTA */}
-          <a
-            href="/#contact"
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-full font-semibold hover:bg-primary/90 transition-colors text-sm sm:text-base"
-          >
-            <Mail className="w-4 h-4" />
-            {tr.cta}
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          {/* Email capture (conversion) */}
+          {allFilled && (
+            submitted ? (
+              <div className="mt-6 flex items-center justify-center gap-2 bg-primary/10 text-primary rounded-xl px-4 py-3.5 text-sm font-medium">
+                <Mail className="w-4 h-4" />
+                {tr.thanks}
+              </div>
+            ) : (
+              <div className="mt-6">
+                <p className="text-sm text-muted-foreground mb-2 text-center">{tr.leadIntro}</p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={tr.emailPlaceholder}
+                    autoComplete="email"
+                    className="flex-1 rounded-full border border-input bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={!validEmail || submitting}
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Mail className="w-4 h-4" />
+                    {tr.sendCta}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+                {error && <p className="text-xs text-destructive mt-1.5 text-center">{tr.errorMsg}</p>}
+              </div>
+            )
+          )}
 
           {/* Disclaimer */}
           <p className="text-xs text-muted-foreground/60 text-center mt-4 leading-relaxed flex items-start gap-1.5 justify-center">
