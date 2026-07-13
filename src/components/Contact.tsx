@@ -48,7 +48,7 @@ const Contact = () => {
   const contactInfo = [
     { icon: MapPin, label: t('contact.address'), value: 'Nice, France', href: undefined },
     { icon: Phone, label: t('contact.phone'), value: '+33 X XX XX XX XX', href: 'tel:+33XXXXXXXXX' },
-    { icon: Mail, label: t('contact.email'), value: 'contact@mayo-nice.fr', href: 'mailto:contact@mayo-nice.fr' },
+    { icon: Mail, label: t('contact.email'), value: 'contact@mayocreche.fr', href: 'mailto:contact@mayocreche.fr' },
     { icon: Clock, label: t('contact.hours'), value: '', href: undefined },
   ];
 

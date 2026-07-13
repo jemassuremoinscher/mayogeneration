@@ -18,7 +18,7 @@ import ParentApp from '@/components/ParentApp';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const baseUrl = 'https://mayo-nice.fr';
+const baseUrl = 'https://mayocreche.fr';
 
 const meta = {
   fr: {
@@ -46,7 +46,7 @@ const jsonLd = {
   description: 'Crèche multilingue à Nice – Multilingual nursery in Nice',
   url: baseUrl,
   telephone: '+33XXXXXXXXX',
-  email: 'contact@mayo-nice.fr',
+  email: 'contact@mayocreche.fr',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Avenue Jean Médecin',

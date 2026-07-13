@@ -8,7 +8,7 @@ import ScrollProgressBar from '@/components/ScrollProgressBar';
 import CafSimulator from '@/components/CafSimulator';
 import { MapPin, Navigation, ArrowLeft, Star, AlertCircle, Languages } from 'lucide-react';
 
-const baseUrl = 'https://mayo-nice.fr';
+const baseUrl = 'https://mayocreche.fr';
 
 const LocationPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -95,7 +95,7 @@ const LocationPage = () => {
     description: tr.metaDescription,
     url: `${baseUrl}/${location.slug}`,
     telephone: '+33XXXXXXXXX',
-    email: 'contact@mayo-nice.fr',
+    email: 'contact@mayocreche.fr',
     address: {
       '@type': 'PostalAddress',
       addressLocality: location.city,

@@ -23,7 +23,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import b2bHero from '@/assets/b2b-hero.jpg';
 
-const baseUrl = 'https://mayo-nice.fr';
+const baseUrl = 'https://mayocreche.fr';
 
 const content = {
   fr: {
