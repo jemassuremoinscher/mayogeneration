@@ -45,7 +45,7 @@ const jsonLd = {
   name: 'Mayo',
   description: 'Crèche multilingue à Nice – Multilingual nursery in Nice',
   url: baseUrl,
-  telephone: '+33XXXXXXXXX',
+  telephone: '+33498101010',
   email: 'contact@mayocreche.fr',
   address: {
     '@type': 'PostalAddress',

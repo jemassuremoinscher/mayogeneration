@@ -11,6 +11,8 @@ export interface Location {
   tagline?: { fr: string; en: string; ru: string; it?: string };
   lat: number;
   lng: number;
+  streetAddress?: string;
+  postalCode?: string;
   translations: {
     fr: LocationTranslation;
     en: LocationTranslation;
@@ -34,6 +36,8 @@ export const locations: Location[] = [
     slug: 'creche-nice-medecin',
     city: 'Nice',
     neighborhood: 'Médecin',
+    streetAddress: '2 rue d\'Angleterre, Villa Diable Rouge',
+    postalCode: '06000',
     priorityOpening: true,
     highlightedLanguage: 'it',
     availableLanguages: ['fr', 'en', 'it'],

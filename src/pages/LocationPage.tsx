@@ -94,10 +94,12 @@ const LocationPage = () => {
     name: `Mayo ${location.city}`,
     description: tr.metaDescription,
     url: `${baseUrl}/${location.slug}`,
-    telephone: '+33XXXXXXXXX',
+    telephone: '+33498101010',
     email: 'contact@mayocreche.fr',
     address: {
       '@type': 'PostalAddress',
+      ...(location.streetAddress ? { streetAddress: location.streetAddress } : {}),
+      ...(location.postalCode ? { postalCode: location.postalCode } : {}),
       addressLocality: location.city,
       addressRegion: 'Provence-Alpes-Côte d\'Azur',
       addressCountry: location.city === 'Monaco' ? 'MC' : 'FR',

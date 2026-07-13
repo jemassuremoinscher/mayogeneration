@@ -35,7 +35,7 @@ const FloatingCTA = () => {
 
         {/* Call button */}
         <a
-          href="tel:+33XXXXXXXXX"
+          href="tel:+33498101010"
           className="flex items-center justify-center gap-2.5 py-4 px-6 font-semibold text-base font-body transition-all active:scale-[0.98]"
           style={{
             background: 'var(--gradient-primary)',
