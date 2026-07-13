@@ -12,8 +12,8 @@ const MentionsLegales = () => {
     {
       title: L({ fr: 'Éditeur du site', en: 'Site publisher' }),
       body: L({
-        fr: 'Le site mayocreche.fr est édité par Mammouth Patrimoine, SASU au capital de 1 000 €, dont le siège social est situé 2 rue d\'Angleterre, Villa Diable Rouge, 06000 Nice, France. Immatriculée au Registre du Commerce et des Sociétés de Nice sous le numéro 893 960 146. N° de TVA intracommunautaire : FR06893960146. Directeur de la publication : Paul Vuillier.',
-        en: 'The mayocreche.fr website is published by Mammouth Patrimoine, a SASU with share capital of €1,000, registered office at 2 rue d\'Angleterre, Villa Diable Rouge, 06000 Nice, France. Registered with the Nice Trade and Companies Register under number 893 960 146. Intra-community VAT number: FR06893960146. Publication director: Paul Vuillier.',
+        fr: 'Le site mayocreche.fr est édité par Mammouth Patrimoine, SASU au capital de 10 000 €, dont le siège social est situé 2 rue d\'Angleterre, Villa Diable Rouge, 06000 Nice, France. Immatriculée au Registre du Commerce et des Sociétés de Nice sous le numéro 893 960 146. N° de TVA intracommunautaire : FR06893960146. Directeur de la publication : Paul Vuillier.',
+        en: 'The mayocreche.fr website is published by Mammouth Patrimoine, a SASU with share capital of €10,000, registered office at 2 rue d\'Angleterre, Villa Diable Rouge, 06000 Nice, France. Registered with the Nice Trade and Companies Register under number 893 960 146. Intra-community VAT number: FR06893960146. Publication director: Paul Vuillier.',
       }),
     },
     {
