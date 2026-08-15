@@ -19,6 +19,7 @@ const STORAGE_KEY = 'mayo:admin:pwd';
 export default function Admin() {
   const [pwd, setPwd] = useState('');
   const [authed, setAuthed] = useState(false);
+  const [forgot, setForgot] = useState(false);
   const [tab, setTab] = useState<'leads' | 'creches' | 'seo'>('leads');
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(false);
@@ -41,23 +42,41 @@ export default function Admin() {
     setLoading(true); setError(null);
     try {
       const r = await fetch('/api/leads', { headers: { 'X-Admin-Password': password } });
-      if (r.status === 401) { setError('Mot de passe invalide'); setAuthed(false); return; }
-      if (!r.ok) { setError('Erreur serveur'); return; }
+      if (r.status === 401) {
+        setError('Mot de passe invalide');
+        setAuthed(false);
+        sessionStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+      const contentType = r.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        setError("L'API n'est pas disponible sur cet environnement (elle ne fonctionne que sur le site déployé Vercel, pas dans l'aperçu).");
+        setAuthed(false);
+        return;
+      }
+      if (!r.ok) { setError('Erreur serveur — vérifie la configuration Google Sheets.'); return; }
       const data = await r.json();
       setLeads(data.leads || []);
       setAuthed(true);
       sessionStorage.setItem(STORAGE_KEY, password);
     } catch {
-      setError('Connexion impossible');
+      setError('Connexion impossible — réseau indisponible ou API non déployée.');
     } finally { setLoading(false); }
   };
 
   const refresh = () => tryLogin(pwd);
 
-  const logout = () => {
+  const hardReset = () => {
     sessionStorage.removeItem(STORAGE_KEY);
-    setAuthed(false); setPwd(''); setLeads([]);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      Object.keys(sessionStorage).filter((k) => k.startsWith('mayo:admin')).forEach((k) => sessionStorage.removeItem(k));
+    } catch { /* ignore */ }
+    setAuthed(false); setPwd(''); setLeads([]); setError(null); setForgot(false);
   };
+
+  const logout = hardReset;
+
 
   const updateStatus = async (id: string, status: Status) => {
     setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
@@ -118,6 +137,33 @@ export default function Admin() {
             className="w-full bg-primary text-primary-foreground rounded-full py-2.5 text-sm font-semibold disabled:opacity-50">
             {loading ? '…' : 'Se connecter'}
           </button>
+
+          <div className="flex items-center justify-between gap-2 text-xs">
+            <button type="button" onClick={() => setForgot((v) => !v)} className="text-primary hover:underline">
+              Mot de passe oublié ?
+            </button>
+            <button type="button" onClick={hardReset} className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+              <LogOut className="w-3 h-3" /> Vider la session
+            </button>
+          </div>
+
+          {forgot && (
+            <div className="rounded-xl bg-muted/40 border border-border p-3 text-xs text-muted-foreground space-y-2">
+              <p className="font-semibold text-foreground">Réinitialiser l'accès administrateur</p>
+              <p>
+                L'accès repose sur un mot de passe unique stocké côté serveur (variable
+                <code className="mx-1 rounded bg-background px-1">ADMIN_PASSWORD</code>) — il n'y a pas d'envoi
+                d'email possible.
+              </p>
+              <ol className="list-decimal pl-4 space-y-1">
+                <li>Ouvre le projet sur Vercel → Settings → Environment Variables.</li>
+                <li>Modifie <code className="rounded bg-background px-1">ADMIN_PASSWORD</code> avec la nouvelle valeur.</li>
+                <li>Redéploie le projet (Deployments → Redeploy).</li>
+                <li>Reviens ici, clique « Vider la session », puis connecte-toi avec le nouveau mot de passe.</li>
+              </ol>
+            </div>
+          )}
+
         </form>
       </main>
     );
