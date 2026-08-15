@@ -137,6 +137,33 @@ export default function Admin() {
             className="w-full bg-primary text-primary-foreground rounded-full py-2.5 text-sm font-semibold disabled:opacity-50">
             {loading ? '…' : 'Se connecter'}
           </button>
+
+          <div className="flex items-center justify-between gap-2 text-xs">
+            <button type="button" onClick={() => setForgot((v) => !v)} className="text-primary hover:underline">
+              Mot de passe oublié ?
+            </button>
+            <button type="button" onClick={hardReset} className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+              <LogOut className="w-3 h-3" /> Vider la session
+            </button>
+          </div>
+
+          {forgot && (
+            <div className="rounded-xl bg-muted/40 border border-border p-3 text-xs text-muted-foreground space-y-2">
+              <p className="font-semibold text-foreground">Réinitialiser l'accès administrateur</p>
+              <p>
+                L'accès repose sur un mot de passe unique stocké côté serveur (variable
+                <code className="mx-1 rounded bg-background px-1">ADMIN_PASSWORD</code>) — il n'y a pas d'envoi
+                d'email possible.
+              </p>
+              <ol className="list-decimal pl-4 space-y-1">
+                <li>Ouvre le projet sur Vercel → Settings → Environment Variables.</li>
+                <li>Modifie <code className="rounded bg-background px-1">ADMIN_PASSWORD</code> avec la nouvelle valeur.</li>
+                <li>Redéploie le projet (Deployments → Redeploy).</li>
+                <li>Reviens ici, clique « Vider la session », puis connecte-toi avec le nouveau mot de passe.</li>
+              </ol>
+            </div>
+          )}
+
         </form>
       </main>
     );
